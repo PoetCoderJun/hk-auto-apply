@@ -8,17 +8,13 @@ A Hong Kong job-application skill for any Personal Agent or local agent that sup
 
 This is not an official xAI repository. There is no service to deploy, and the repo does not include anyone's resume or account.
 
-## Runtime
+## Install and usage
 
 This skill can run on any Personal Agent that supports Browser Use / Computer Use, or on a local agent with the same kind of browser control. Searching, signing in, and applying all depend on that capability.
 
 A Personal Agent such as [Grok Bot](https://docs.x.ai/grok-bot/skills-routines-and-automations) or OpenAI Dots is the smoother setup: a cloud computer can stay online, which helps with backlog apply, scheduled checks for new roles, interview reminders, and progress tracking. A local agent works too; if the run uses your own computer, keep it on and online during the run and when the scheduled check fires.
 
-The application log and research note do not have to live in Notion. You can keep or export them as a local Excel workbook, a Google Sheet, a Feishu / Lark sheet, or any other table you name.
-
-## One message to your agent
-
-Paste this into any Personal Agent or local agent that supports Browser Use / Computer Use, such as Grok Bot or OpenAI Dots:
+Paste this into the assistant:
 
 ```text
 Please install this GitHub skill: https://github.com/PoetCoderJun/hk-auto-apply
@@ -26,17 +22,11 @@ Please install this GitHub skill: https://github.com/PoetCoderJun/hk-auto-apply
 Read START.md and save the entire skill/hk-auto-apply directory to my skill library (SKILL.md, references, and scripts — not SKILL.md alone). Then tell me what I still need to provide.
 ```
 
-Then send a resume and describe or upload the role scope.
+Then send a resume and describe or upload the role scope. The assistant collects files, facts, and preferences first, and only asks for whatever is still missing.
 
-## What you get
+Do not send login passwords to the assistant. Sign-in happens on the computer actually used for the run: take it over and log in yourself, or let the assistant drive login there.
 
-1. **Backlog apply**: submit matching, submittable Hong Kong roles from roughly the last 30 days, then write an analysis note and an application log.
-2. **Cross-platform dedup**: when both platforms are in scope, the same company and substantially the same title are applied once.
-3. **Daily new roles**: incremental checks at the time you choose; matching roles are submitted, and you still get a short update when nothing new qualifies.
-
-## What to prepare
-
-The bot collects files, facts, and preferences first, and only asks for whatever is still missing.
+## Inputs
 
 **Files**
 - Resume (PDF or Word)
@@ -53,7 +43,20 @@ The bot collects files, facts, and preferences first, and only asks for whatever
 - Keep the tracker as local Excel, Google Sheets, Feishu / Lark, Notion, or another table you name (default: a local Excel file)
 - When the daily check should run (default: about 09:00 on weekdays in your timezone)
 
-Do not send login passwords to the bot. Sign-in happens on the computer actually used for the run: take it over and log in yourself, or let the assistant drive login there. If you use your own computer, keep it on and online during the run and when the scheduled check fires.
+## Outputs
+
+- An application log with a platform column
+- An analysis note covering search coverage, funnel numbers, role-family judgments, and common skip reasons
+- A short update after each incremental check, including when nothing new qualifies
+
+The application log and research note do not have to live in Notion. You can keep or export them as a local Excel workbook, a Google Sheet, a Feishu / Lark sheet, or any other table you name.
+
+## Actions
+
+1. **Backlog apply**: submit matching, submittable Hong Kong roles from roughly the last 30 days.
+2. **Cross-platform dedup**: when both platforms are in scope, the same company and substantially the same title are applied once.
+3. **Fill applications**: complete on-site Quick Apply / Easy Apply; when a role opens the company's own page, follow spray mode or leave-no-company-behind mode as you chose.
+4. **Daily new roles**: incremental checks at the time you choose; matching roles are submitted and the tracker is updated.
 
 ## Repository layout
 
