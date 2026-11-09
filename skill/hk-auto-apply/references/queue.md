@@ -58,7 +58,7 @@
 ```
 
 - `result` 只能是 `applied` 或 `skipped`。`skipped` 只用于**已读 JD 或用户接受后**的硬不匹配、已关闭岗等，见 [applying.md](applying.md) 与 [selection.md](selection.md)。
-- **不要**把 `jd_fetch_429`、`search_truncated`、重试耗尽等资源/覆盖类原因写进 `apply_log` 的 `skipped`；那些留在 `deferred.jsonl` 或 `search_coverage.json`。
+- **不要**把 `jd_fetch_429`、`search_truncated`、重试耗尽等资源/覆盖类原因写进 `apply_log` 的 `skipped`；岗位级留在 `deferred.jsonl`，分区级留在 `search_coverage_backfill.json` 或 `search_coverage_incremental.json`。
 - `reason` 用稳定的英文蛇形词。跟踪表备注再写成中文。
 - `job_id` 已在 `apply_log.jsonl` 里 `applied` 的，不要再投。
 

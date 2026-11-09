@@ -46,7 +46,7 @@ LinkedIn guest 搜岗、已登录搜岗、岗位页 JD 读取，以及 JobsDB �
 
 1. **立刻**落盘：该次请求日志、触发 429 的分区状态、全局 `consecutive_429_count`。
 2. 若响应带 `Retry-After`：尊重其秒数或日期，作为该请求/分区的 `next_retry_at` 下限。
-3. 若无 `Retry-After`：对该请求做 capped 指数回退（30s → 60s → 120s）并加小抖动；**最多 2 次**重试同一 `keywords+start`（或同一 JD URL）。
+3. 若无 `Retry-After`：不声称官方等待时长，用运行级 capped 回退并加小抖动：第 1 次 429 后约 **30s**、第 2 次约 **60s**（第 3 次触及 429 时用 **120s** 阶梯计算下一次，但通常已触发 deferred/冷却）。同一 `keywords+start`（或同一 JD URL）**最多 2 次重试**（含初次失败，至多 3 次 429），之后标 deferred 或进入域冷却。
 4. 仍失败：该搜索分区标为 `deferred` 或 `truncated`，写入 `next_retry_at`；若已耗尽单请求重试或 `consecutive_429 >= 3`，设置 `domain_cooldown_until = now + 30min`，停止该域一切顶层请求直到冷却结束。
 5. 冷却期间**不要**用缩短 sleep、并发、换 IP、换无头模式、换账号等方式绕过；向用户说明暂停原因与预计恢复时间。
 
