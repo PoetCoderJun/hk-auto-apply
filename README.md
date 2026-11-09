@@ -62,7 +62,6 @@ skill/hk-auto-apply/
   agents/openai.yaml
   references/                    收集资料、登录、平台、搜索、填表、队列、选岗、去重、报表
   scripts/                       去重和 JD 信号提取
-tests/
 ```
 
 候选人是谁、选哪些岗、薪资和签证填什么，都以安装后你交来的材料为准，不会写死在技能里。

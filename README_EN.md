@@ -62,7 +62,6 @@ skill/hk-auto-apply/
   agents/openai.yaml
   references/                    intake, login, platforms, search, apply, queue, selection, dedup, reporting
   scripts/                       dedup and JD signal extraction
-tests/
 ```
 
 Who the candidate is, which roles to target, and what to put on application forms all come from the materials you provide after install. They are not hardcoded in the skill.
