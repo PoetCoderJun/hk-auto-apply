@@ -42,17 +42,26 @@
 
 分析报告要写成一篇可复用的调研文档，不是只在聊天里口头总结一下。它可以是本地文档、Google 文档、飞书文档、Notion 页面，或和跟踪表放在同一套工具里，不必默认上传成 Notion。内容包括：
 
-- 搜索用了哪些词和时间窗；哪些词因为限流没有翻完
-- 各平台的漏斗数字：唯一卡片、标题匹配、成功投出、按原因归类的跳过、跨平台重复
+- 搜索用了哪些词和时间窗；[search-coverage.md](search-coverage.md) 中 `complete` / `truncated` / `deferred` 分区数量及原因（429、挑战、超时、用户暂停）；明确范围是「本次计划关键词与时间窗」，不是全站
+- 各平台的漏斗数字：唯一卡片（`discovered`）、deferred 待重试数、标题匹配、成功投出、**硬规则** skipped、跨平台重复；区分 retry 事件次数与唯一 `job_id`
 - 各方向目前在开的岗与判断
 - 常见过滤原因
 - 投递时要注意的表单填写口径
 
 调研文档里要有单独的「平台」一节，并链到或附上跟踪表。用户要求公开分享时，再按所选载体给出只读链接或导出文件；未要求就保持私有。
 
+## Backfill 与 incremental 在报告中的写法
+
+分析报告必须有两块独立内容（可同一文档两节）：
+
+1. **Backfill**：`search_coverage_backfill.json` 的 complete/truncated/deferred 明细；`campaign_state.backfill` 的 `search_complete` / `apply_complete`；未决 `deferred` 数；是否满足 [search-coverage.md](search-coverage.md) 的首轮完成条件。
+2. **Incremental**：最近一次（或历次摘要）`search_coverage_incremental.json` 与当次队列/`apply_log` 增量；勿与 backfill 分区混计。
+
+未满足 backfill 完成条件时，报告标题或摘要里不得写「首轮已全部完成」，应写清缺的是搜岗分区、deferred、还是剩余可投递队列。
+
 ## 按约定时间看新岗
 
-首轮做完（或用户明确要先设好定时任务）之后，和用户确认日常增量检查的时间：默认是工作日早上大约 9:00、用户自己的时区，时间可以有弹性，但必须让用户知道，并可以改成他们指定的时间。若投递跑在用户自己的电脑上，明确告诉他们：到点时那台电脑需要开机并保持在线。
+**Backfill 的搜岗与可投递队列均已达 [search-coverage.md](search-coverage.md) 完成条件**（或用户已书面确认暂停并知悉缺口）之后，再与用户确认日常增量检查的时间：默认是工作日早上大约 9:00、用户自己的时区，时间可以有弹性，但必须让用户知道，并可以改成他们指定的时间。若投递跑在用户自己的电脑上，明确告诉他们：到点时那台电脑需要开机并保持在线。
 
 然后按约定时间建定时任务，任务里写清：
 

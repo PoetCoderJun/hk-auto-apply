@@ -1,6 +1,6 @@
 # LinkedIn 搜岗（香港，近约 30 天）
 
-只负责发现岗位卡片。填写申请见 [applying.md](applying.md)。中断后续跑见 [queue.md](queue.md)。
+只负责发现岗位卡片。域级节流与 429 见 [rate-limit-and-pacing.md](rate-limit-and-pacing.md)。分区覆盖与续跑见 [search-coverage.md](search-coverage.md)。填写申请见 [applying.md](applying.md)。中断后续跑见 [queue.md](queue.md)。
 
 ## Guest 接口
 
@@ -12,9 +12,9 @@ https://www.linkedin.com/jobs-guest/jobs/api/seeMoreJobPostings/search?keywords=
 
 - 香港用 `geoId=103291313`（Hong Kong SAR）。查其他地点：`https://www.linkedin.com/jobs-guest/api/typeaheadHits?query={地名}&typeaheadType=GEO`
 - 也可以加 `location=Hong%20Kong%20SAR`，但香港海投以这个 geoId 为准，避免范围漂到邻近地区。
-- `f_TPR=r2592000` 是近约 30 天；`r86400` 是一天，`r604800` 是一周。首轮存量用 30 天；增量按上次之后的窗口即可。
+- `f_TPR=r2592000` 是近约 30 天；`r86400` 是一天，`r604800` 是一周。首轮存量用 30 天；增量按上次之后的窗口即可（可与旧 backfill 时间窗重叠，用岗位 ID 去重）。
 - `sortBy=DD` 表示最新优先。
-- 每页大约 10 张卡片；`count` 参数通常被忽略。用 `start=0`、`10`、`20`… 翻页。某一页少于 10 张，就停止这个关键词。
+- 每页大约 10 张卡片；`count` 参数通常被忽略。用 `start=0`、`10`、`20`… 翻页。某一页少于 10 张，且 HTTP 成功，才可将该分区标为 `complete`。
 - 返回的是 HTML 片段，不是 JSON。从每个 `<li>` 取出：
   - 岗位 ID：`data-entity-urn="urn:li:jobPosting:(\d+)"`
   - 标题：`h3.base-search-card__title`
@@ -25,28 +25,34 @@ https://www.linkedin.com/jobs-guest/jobs/api/seeMoreJobPostings/search?keywords=
 - 规范 JD 链接写成 `https://www.linkedin.com/jobs/view/{job_id}`。跨关键词只用岗位 ID 去重。
 - Guest 卡片通常看不出是否有 Easy Apply，不要在这个阶段下结论。
 
-两次请求之间至少间隔约 1 秒。即使这样，同一个关键词也常常在成功翻过前几页之后返回 HTTP 429。这是常见情况，不是偶发故障。
+Guest 顶层请求必须遵守 [rate-limit-and-pacing.md](rate-limit-and-pacing.md) 的默认间隔与 10 分钟滚动上限；旧文档里的「≥1 秒」已不够，**不要**在 429 后缩短间隔。同一时刻只进行一个 guest 翻页或 JD 打开。
 
-## 429 和挑战页
+## 429、截断与已登录回退
 
-实战里：许多关键词在成功翻 2 到 8 页后开始 429，这个词的覆盖会不完整。429 的响应可能是一段跳回 linkedin.com 的 HTML，而不是岗位卡片。
+实战里常见：部分关键词在翻过若干页后开始 HTTP 429，甚至 36/36 个词都被截断；JD 抓取也会 429。**不能**把不完整覆盖说成「香港近 30 天的全部岗位」。
 
-不要对同一个 `keywords + start` 死循环重试。按这个顺序处理：
+收到 429 时：
 
-1. 记下这个关键词已经拿到的页数、卡片数，并标成被截断。
-2. 停止继续翻这个词。
-3. 稍等再换下一个关键词，不要连续对许多词狂刷。
-4. 如果连续多个词一开始就 429，或 guest 返回 Cloudflare 挑战页，改到已登录的浏览器里搜同样的词、地点和近 30 天筛选：`https://www.linkedin.com/jobs/search/?keywords=...&geoId=103291313&f_TPR=r2592000&sortBy=DD`
-5. 浏览器也被限流或要求验证时，停下来告诉用户，不要假装已经搜全。
+1. 按 [rate-limit-and-pacing.md](rate-limit-and-pacing.md) 落盘日志、`Retry-After`（若有）、回退与可能的 30 分钟域冷却。
+2. 将该 `partition_id` 标为 `truncated` 或 `deferred`，`next_cursor` 停在失败的那一页。
+3. 换关键词前至少等待配置的 `min_gap_between_keywords_sec`。
+4. 若连续多个词一开始就 429、或 guest 返回 Cloudflare 挑战页，在**用户已授权的已登录**浏览器里，用同样的词、地点和近 30 天筛选搜岗：`https://www.linkedin.com/jobs/search/?keywords=...&geoId=103291313&f_TPR=r2592000&sortBy=DD`。这是 guest 不可用时的正当主路径或回退，不是为了绕过冷却而换通道。
+5. 已登录侧仍被限流或要求验证：停止该路由，告诉用户；不要用多账号、代理或无头模式绕过。
 
-汇报漏斗时如实写哪些词被 429 截断。不要把部分结果说成「香港近 30 天的全部岗位」。
+汇报漏斗时列出：`complete` / `truncated` / `deferred` 分区数、各词最后成功的 `start`、以及 429 次数。队列已空 **不等于** 搜索覆盖已完成。
 
 ## 读完整 JD
 
 投之前（或标题拿不准时）打开 `https://www.linkedin.com/jobs/view/{job_id}`。岗位说明常常在 `.show-more-less-html__markup`。不要把卡片标题当成已经读完 JD。
 
-抓取岗位页失败时：把该岗记成不投，备注「岗位页读取失败」，不要放进待投队列。只有标题能看、且标题本身没有硬性排除时，可以暂时留着，但投递当时必须再读一遍现场 JD。
+岗位页 **HTTP 429、超时、或页面明显不完整/空正文** 时：
+
+- 写入 `deferred.jsonl`，原因如 `jd_fetch_429` / `jd_fetch_timeout` / `jd_fetch_incomplete`。
+- 按节流规则安排 `next_retry_at`；**不要**写入 `apply_log.jsonl` 的 `skipped`，**不要**当作最终不投。
+- 重试耗尽后仍无法读取：状态保持 `pending`/`deferred`，在分析报告里列为「JD 未解析」；只有用户明确接受遗漏，或后续重试仍证实岗位已关闭，才可用硬规则跳过（见 [selection.md](selection.md)）。
+
+只有标题、且标题无硬性排除时，可暂时保留在发现列表，但投递当时必须再读现场 JD。
 
 ## 搜索词
 
-从用户的「优先」和「可考虑」生成多个词，见 [selection.md](selection.md)。每个词独立翻页，再用岗位 ID 合并。不要只搜一两个词就声称没有岗。
+从用户的「优先」和「可考虑」生成多个词，见 [selection.md](selection.md)。每个词独立翻页并落盘分区状态，再用岗位 ID 合并。不要只搜一两个词就声称没有岗。

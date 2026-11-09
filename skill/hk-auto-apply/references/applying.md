@@ -6,7 +6,7 @@
 
 留在 LinkedIn 站内完成。投递本身必须在已登录会话里做。
 
-1. 打开 `https://www.linkedin.com/jobs/view/{job_id}`，先读现场 JD，再决定投还是不投。
+1. 打开 `https://www.linkedin.com/jobs/view/{job_id}`，先读现场 JD，再决定投还是不投。若 JD 因 429、超时或页面不完整读失败，按 [queue.md](queue.md) 写入 `deferred.jsonl` 并安排重试，**不要**直接记入 `apply_log` 的 `skipped`。
 2. 点 Easy Apply / 轻松申请。多页时按 Next / 下一步走到 Review，核对后再 Submit / 提交。
 3. 确认页上当前选中的简历必须是用户这次交来的那份。账号里若还列着旧文件，先换成这次的。
 4. 可选的封面信跳过。若系统必填封面信，只根据简历写一小段事实，不要发挥。

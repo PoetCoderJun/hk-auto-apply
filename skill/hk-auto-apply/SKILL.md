@@ -5,8 +5,9 @@ description: >-
   resume and a job scope. Use when installing this GitHub skill, or when the
   user mentions 香港求职, 海投, 自动投简历, JobsDB, LinkedIn 投递, or weekday checks for new
   Hong Kong postings. Collects files, facts, and preferences first and chases
-  any gaps. Runs on the cloud computer or the user's own computer and never asks
-  for login passwords. Do not use for job sites the user did not name.
+  any gaps. Runs on any Personal Agent or local agent that supports Browser Use
+  or Computer Use, on the cloud computer or the user's own computer, and never
+  asks for login passwords. Do not use for job sites the user did not name.
 license: MIT
 metadata:
   author: PoetCoderJun
@@ -30,6 +31,8 @@ metadata:
 - 在某个平台上搜岗或投递：读 [references/platforms.md](references/platforms.md)
 - 搜 JobsDB 的路径、翻页和卡片：读 [references/jobsdb-search.md](references/jobsdb-search.md)
 - 搜 LinkedIn 的公开接口、分页和 429：读 [references/linkedin-search.md](references/linkedin-search.md)
+- 域级节流、429 回退与证据日志：读 [references/rate-limit-and-pacing.md](references/rate-limit-and-pacing.md)
+- 搜岗分区、游标与 complete/truncated/deferred：读 [references/search-coverage.md](references/search-coverage.md)
 - 填写 Easy Apply / Quick Apply，或判断外部申请页：读 [references/applying.md](references/applying.md)
 - 把发现结果落盘、中断后续跑：读 [references/queue.md](references/queue.md)
 - 把岗位范围编成可执行规则，或阅读 JD：读 [references/selection.md](references/selection.md)
@@ -42,9 +45,9 @@ metadata:
 2. 只做用户点名的平台。说 JobsDB 和 LinkedIn、两个都投，或在 JobsDB 同等逻辑上加入 LinkedIn，就两边都全量海投并去重。只点其中一个时，不要自行扩到另一个，也不要扩到没点名的求职网站。
 3. 问清这次跑在云电脑还是用户自己的电脑，然后在那台电脑上完成登录。不要向用户要密码。
 4. 打开或创建带「平台」列的跟踪表。载体可以是本地 Excel、Google 表格、飞书、Notion 或用户指定的其他表；没指定就先做本地 Excel。双平台时，投之前先做去重。
-5. 第一次使用：把近约 30 天内符合规则且能投的岗都投完，不要在大约 20 份时自行停下。把队列落到磁盘上，有进度和卡点都及时告诉用户。
-6. 首轮结束后写完分析报告，并按用户确认的时间建立增量定时任务。
-7. 定时任务只处理上次之后新出现、或表里还没有的岗位；用同一套规则、去重和跟踪表；没有新的可投岗位时也发一条短消息。
+5. **Backfill（首轮存量）**：用 `evidence/search_coverage_backfill.json` 记录计划内分区；遇 429 写 deferred/截断，不假装搜齐全站。把所有 **可投递**（JD 已可读、符合规则、非 deferred）岗处理到 `apply_log` 终态。首轮结束须：分区全 `complete`、`deferred.jsonl` 无未决 backfill JD/search 重试、可投递岗全终态；`apply_queue` 暂空不能单独证明完成。
+6. 仅当 [references/search-coverage.md](references/search-coverage.md) 的 backfill 完成条件（覆盖 + 可投递队列）满足后，才写终版分析报告并称首轮结束；然后与用户确认增量时间、建立 **incremental** 定时任务（`search_coverage_incremental.json` 分开维护）。
+7. 定时任务只做 incremental：上次之后新岗或表里还没有的岗；单次结束分别标记当次搜索/投递是否完成；补历史 truncated 分区走 backfill 文件续跑，不与增量混表。
 
 ## 硬性约束
 
@@ -55,7 +58,11 @@ metadata:
 - 可选封面信就跳过；必填时只根据简历写一小段事实。必填字段不知道就跳过该岗，不要填假。
 - 不要删除跟踪表里的探测行或重复行，除非用户明确要求。
 - 不要把整个待投队列预先写成「待投递」。中断后从已落盘的队列续跑，不要当新发现重新全网再扫一遍。
+- **节流**：同一招聘域同时只有一个进行中的顶层搜岗/JD 请求；遵守 [references/rate-limit-and-pacing.md](references/rate-limit-and-pacing.md) 的运行默认值（10–20s 间隔、guest 10 分钟 ≤20 次、换词 ≥60s）；429 后只许放慢不许加快；记录 `evidence/request_log.jsonl`（无凭证/PII）。可用 `python3 SKILL_DIR/scripts/pacing_gate.py self-check` 做离线自检。
+- **429 / 冷却**：尊重 `Retry-After`；无 Retry-After 响应头时不声称官方等待时长，采用运行级 backoff（30/60/120 秒加随机抖动）：第 1 次 429 后约 30s、第 2 次约 60s（均含抖动）；同一顶层请求**最多 2 次重试**（至多 3 次触及 429），之后该请求/分区 deferred 或域冷却 30 分钟；连续 3 次 429 立即域冷却。冷却期间不轮询，用定时任务在 `next_retry_at` 续跑（见 [references/runtime.md](references/runtime.md)）。不用换号/代理/无头绕过限制。
+- **覆盖**：backfill 与 incremental 分文件；按 [references/search-coverage.md](references/search-coverage.md) 维护分区与游标；失败页从 `next_cursor` 续跑；队列空 ≠ 搜索完成；**首轮完成 = backfill 分区全 complete + `deferred.jsonl` 无未决 backfill JD/search 重试 + 可投递岗全终态**。
+- **deferred**：JD 抓取 429/超时/疑似不完整 → `deferred.jsonl`，**不是** `apply_log` 的 `skipped`。仅硬不匹配、已核实关闭或用户接受遗漏才可 skipped。
 
 ## 交付
 
-按平台拆开汇报：唯一卡片数、标题匹配数、成功投出数、按原因归类的跳过数、跨平台重复数、哪些搜索因限流不完整、跟踪表的文件或链接、调研文档的文件或链接，以及定时任务会在几点跑。不要假定跟踪表一定是 Notion。若跑在用户自己的电脑上，同时提醒他们到点需要开机。
+按平台拆开汇报：唯一卡片数、覆盖 summary（complete/truncated/deferred）、deferred 待重试数、标题匹配数、成功投出数、硬规则 skipped 数、跨平台重复数、限流导致的分区列表、跟踪表的文件或链接、调研文档的文件或链接，以及定时任务会在几点跑。说明范围是「计划内搜索」，不是全站已穷尽。不要假定跟踪表一定是 Notion。若跑在用户自己的电脑上，同时提醒他们到点需要开机。

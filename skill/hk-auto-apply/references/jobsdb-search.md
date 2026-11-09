@@ -1,6 +1,6 @@
 # JobsDB 搜岗（香港，近约 30 天）
 
-网站是 `hk.jobsdb.com`。填写申请见 [applying.md](applying.md)。中断后续跑见 [queue.md](queue.md)。
+网站是 `hk.jobsdb.com`。填写申请见 [applying.md](applying.md)。中断后续跑见 [queue.md](queue.md)。顶层翻页节流与覆盖分区见 [rate-limit-and-pacing.md](rate-limit-and-pacing.md) 与 [search-coverage.md](search-coverage.md)。
 
 ## 怎么搜
 
