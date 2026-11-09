@@ -1,0 +1,46 @@
+# 填写申请与外部申请页
+
+候选人怎么填，只以这份简历和 intake 问到的信息为准。不要编造年限、牌照、语言、地址或证件号。不要向用户要登录密码，也不要为了投一个岗去新建需要密码的雇主网站账号。
+
+## LinkedIn Easy Apply / 轻松申请
+
+留在 LinkedIn 站内完成。投递本身必须在已登录会话里做。
+
+1. 打开 `https://www.linkedin.com/jobs/view/{job_id}`，先读现场 JD，再决定投还是不投。
+2. 点 Easy Apply / 轻松申请。多页时按 Next / 下一步走到 Review，核对后再 Submit / 提交。
+3. 确认页上当前选中的简历必须是用户这次交来的那份。账号里若还列着旧文件，先换成这次的。
+4. 可选的封面信跳过。若系统必填封面信，只根据简历写一小段事实，不要发挥。
+5. 筛选题用 intake 和简历里已有的答案：工作身份或签证、期望月薪（问年薪就换算）、可入职时间、电话、邮箱、语言。简历没写粤语，就不要填会粤语。
+6. 可选的人口统计或自我识别题留空。若这类题是必填、而用户又没给过答案，跳过该岗，不要代选。
+7. 必填字段不知道就跳过该岗，备注 `unknown_required_field`，不要填假。
+8. 操作慢一点。LinkedIn 容易限流或再次要求设备确认；遇到验证墙不要死循环。过不去就停下来告诉用户。
+
+只有看到成功确认，才记成已投递。常见原文包括：`申请已提交`、`现已申请`、`Your application was sent`、`application sent`、`您的申请已发送给` 公司名。把页面上的原文记进 `confirmation`。
+
+平台已经显示 Applied / 已申请的，记成已投递并备注「LinkedIn 已显示已申请」，不要再点一次申请。
+
+## JobsDB Quick Apply
+
+留在 JobsDB 站内。路径大致是 `/job/{id}/apply` → 角色要求 → 资料 → 确认 → `/job/{id}/apply/success`。成功页会出现 `Your application has been sent to {公司}`。站内通知邮件的标题也可能是 `Your application was successfully submitted`。
+
+不要盲目点会跳到外部公司申请页的 Apply：JobsDB 有可能在外部表单还没填完时就把该岗标成已申请。没有 Quick Apply 的 Private Advertiser 广告，跳过一键投递。
+
+## 外部雇主申请页
+
+Apply 也可能跳到 PageUp、Workday、Avature、北森、Workable、Greenhouse、Taleo、Oracle HCM、Aplitrak 等。看一眼，简单就填，复杂就放弃，记成 `external_ats_complex`。外部申请放弃只算跳过，不算投出。
+
+**可以填的简单页**大致是：字段不多，答案在简历或 intake 里都有；不用注册新账号；不用新设密码；一两页就能提交；提交后能看到明确的收到申请原文（例如 `Thanks for applying`、`Thank you for your submission`）。
+
+**应该放弃的复杂页**包括：
+
+- 要注册新账号或设置密码
+- 一打开就是 Workday / Taleo / Oracle HCM 等登录墙
+- 要上传身份证、护照扫描件，或要录视频、做很长的测评
+- 多页大量自定义题，且有必填项简历和 intake 都答不了
+- 流程明显填不完，或看不出怎样才算提交成功
+
+不要为了投递去猜一个密码，或在雇主网站上新开账号，除非用户明确要求这么做。
+
+## 成功才算投出
+
+没看到成功确认，就不要把该岗写成已投递。确认原文原样记下来，不要改写。

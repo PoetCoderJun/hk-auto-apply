@@ -8,17 +8,16 @@
 - 还没有账号就先注册。邮箱优先用用户允许使用的 bot 信箱，或用户指定的邮箱。不要擅自用他们的私人邮箱去注册。
 - 验证码发到 bot 信箱或已连接的邮箱时，自己去取。Google 等单点登录、passkey 或需要用户本人操作时，让用户接管这台电脑完成。
 - 登录后把简历上传到 JobsDB 资料，并设为对雇主可见。职业分类按简历和选岗范围选最接近的一项；拿不准再问一次。
-- 用职位名斜杠路径搜，例如 `/Assistant-Relationship-Manager-jobs`。`keywords=...&where=All Hong Kong` 常常返回 0 条，不要当成真没有岗。
-- Quick Apply 留在 JobsDB 站内，路径大致是 `/job/{id}/apply` → 角色要求 → 资料 → 确认 → `/job/{id}/apply/success`。成功页会出现 `Your application has been sent to {公司}`。
-- 不要盲目点跳到外部公司申请页的 Apply：站内可能在外部表单还没填完时就标成已申请。没有 Quick Apply 的 Private Advertiser 广告，跳过一键投递。
+- 怎么搜、如何翻页、卡片里取哪些字段，见 [jobsdb-search.md](jobsdb-search.md)。不要用 `keywords=...&where=All Hong Kong` 判断没有岗。
+- 怎么填 Quick Apply、何时不要点外部 Apply，见 [applying.md](applying.md)。没有 Quick Apply 的 Private Advertiser 广告，跳过一键投递。
 
 ## LinkedIn
 
 - 登录走 `https://www.linkedin.com/login`。不要向用户要账号密码。
 - 用户自行接管时，等他们在浏览器里登完再继续。用户让助手登录时，在这台电脑的浏览器打开登录页并走流程；若要求在手机 App 里点 Yes、发验证码或出现设备确认，把屏幕交给用户完成。
 - 登录后确认资料姓名与候选人一致，并把这次的简历上传为 Easy Apply 使用的那份。账号里若已有旧简历，优先换成用户这次交来的那份。
-- 搜索可先用公开的 guest jobs 接口拆近约 30 天、香港地区的岗位卡片（`f_TPR=r2592000`，地点用香港 geoId `103291313`）；遇到 429 或挑战页就改在已登录的浏览器里搜。投递本身必须在已登录会话里做。
-- Easy Apply / 轻松申请留在 LinkedIn 站内。确认页要看当前选中的简历文件名是用户这次交来的那份。看到 `application sent`、`已提交`、`Your application was sent` 之类确认，才算投出。
+- 搜索用公开的 guest jobs 接口拆近约 30 天、香港地区的岗位卡片。完整地址、分页、卡片字段和 429 处理见 [linkedin-search.md](linkedin-search.md)。遇到 429 或挑战页，不要死循环重试，按该文档改到已登录的浏览器里搜。投递本身必须在已登录会话里做。
+- Easy Apply / 轻松申请的多页流程、简历文件名核对和成功文案见 [applying.md](applying.md)。
 - 平台已显示 Applied / 已申请的，记成已投递或跳过重复，不要再点一次。
 - 慢一点操作。LinkedIn 容易限流或再次要求设备确认；遇到就停下来告诉用户，不要死循环。
 
@@ -26,7 +25,7 @@
 
 - 从岗位范围推出多个搜索词，搜近约 30 天的香港岗。按当前选岗规则增减关键词，不要只搜一两个词就声称没有岗。
 - 先在平台内按岗位 ID 去重，丢掉超出大约 30 天时间窗的卡片，再按 [dedup.md](dedup.md) 和跟踪表做跨平台去重。
-- Apply 也可能跳到雇主 ATS（PageUp、Workday、Avature、北森、Workable、Greenhouse、Aplitrak 等）：看一眼，简单就填，复杂就放弃并记成跳过。
+- 外部申请页「简单就填、复杂就跳」的判断标准见 [applying.md](applying.md)。外部 ATS 放弃只算跳过，不算投出。
 - 可选封面信就跳过；必填时只根据简历写一小段事实。必填字段不知道就跳过该岗并记到表里，不要填假。
-- 只有看到成功确认，才把该岗记成已投递。外部 ATS 放弃算跳过，不算投出。
-- 每发现、投出或跳过一个岗，马上更新跟踪表，并填上正确的「平台」。
+- 只有看到成功确认，才把该岗记成已投递。
+- 长队列的落盘和续跑见 [queue.md](queue.md)。每发现、投出或跳过一个岗，马上更新跟踪表，并填上正确的「平台」。

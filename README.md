@@ -50,7 +50,7 @@ START.md                         粘贴给 Grok Bot 的安装说明
 skill/hk-auto-apply/
   SKILL.md                       入口：流程、硬性约束、该读哪份参考
   agents/openai.yaml
-  references/                    收集资料、登录、平台、选岗、去重、报表
+  references/                    收集资料、登录、平台、搜索、填表、队列、选岗、去重、报表
   scripts/                       去重和 JD 信号提取
 tests/
 ```

@@ -50,7 +50,7 @@ START.md                         paste-ready install note for Grok Bot
 skill/hk-auto-apply/
   SKILL.md                       entrypoint: workflow, constraints, what to read
   agents/openai.yaml
-  references/                    intake, login, platforms, selection, dedup, reporting
+  references/                    intake, login, platforms, search, apply, queue, selection, dedup, reporting
   scripts/                       dedup and JD signal extraction
 tests/
 ```
