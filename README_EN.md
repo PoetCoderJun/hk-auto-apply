@@ -2,11 +2,19 @@
 
 # hk-auto-apply
 
-A [Grok Bot](https://docs.x.ai/grok-bot/skills-routines-and-automations) skill for Hong Kong job applications: finish the matching roles on [JobsDB](https://hk.jobsdb.com) and [LinkedIn](https://www.linkedin.com), then check for new ones on the schedule you choose.
+A Hong Kong job-application skill for any Personal Agent or local agent that supports Browser Use / Computer Use: finish the matching roles on [JobsDB](https://hk.jobsdb.com) and [LinkedIn](https://www.linkedin.com), then check for new ones on the schedule you choose.
 
 **Resume + role scope → backlog apply + cross-platform dedup + tracker / research note → weekday incremental apply**
 
 This is not an official xAI repository. There is no service to deploy, and the repo does not include anyone's resume or account.
+
+## Runtime
+
+This skill can run on any Personal Agent that supports Browser Use / Computer Use, or on a local agent with the same kind of browser control. Searching, signing in, and applying all depend on that capability.
+
+A Personal Agent such as [Grok Bot](https://docs.x.ai/grok-bot/skills-routines-and-automations) or OpenAI Dots is the smoother setup: a cloud computer can stay online, which helps with backlog apply, scheduled checks for new roles, interview reminders, and progress tracking. A local agent works too; if the run uses your own computer, keep it on and online during the run and when the scheduled check fires.
+
+The application log and research note do not have to live in Notion. You can keep or export them as a local Excel workbook, a Google Sheet, a Feishu / Lark sheet, or any other table you name.
 
 ## One message in Grok Bot
 
@@ -16,7 +24,7 @@ Please install this GitHub skill: https://github.com/PoetCoderJun/hk-auto-apply
 Read START.md and save the entire skill/hk-auto-apply directory to my skill library (SKILL.md, references, and scripts — not SKILL.md alone). Then tell me what I still need to provide.
 ```
 
-Then send a resume and describe or upload the role scope.
+Then send a resume and describe or upload the role scope. Other assistants that can install a GitHub skill and drive Browser Use / Computer Use can use the same files.
 
 ## What you get
 
@@ -39,6 +47,7 @@ The bot collects files, facts, and preferences first, and only asks for whatever
 - JobsDB, LinkedIn, or both
 - Apply matching roles directly, or confirm a list first
 - Run on the cloud computer, or on your own computer
+- Keep the tracker as local Excel, Google Sheets, Feishu / Lark, Notion, or another table you name (default: a local Excel file)
 - When the daily check should run (default: about 09:00 on weekdays in your timezone)
 
 Do not send login passwords to the bot. Sign-in happens on the computer actually used for the run: take it over and log in yourself, or let the assistant drive login there. If you use your own computer, keep it on and online during the run and when the scheduled check fires.
@@ -46,7 +55,7 @@ Do not send login passwords to the bot. Sign-in happens on the computer actually
 ## Repository layout
 
 ```text
-START.md                         paste-ready install note for Grok Bot
+START.md                         paste-ready install note
 skill/hk-auto-apply/
   SKILL.md                       entrypoint: workflow, constraints, what to read
   agents/openai.yaml

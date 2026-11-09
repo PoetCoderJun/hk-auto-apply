@@ -1,6 +1,8 @@
 # Install hk-auto-apply
 
-You are installing a Grok Bot skill from https://github.com/PoetCoderJun/hk-auto-apply
+You are installing a skill from https://github.com/PoetCoderJun/hk-auto-apply
+
+This skill runs on any Personal Agent or local agent that supports Browser Use / Computer Use. Grok Bot and OpenAI Dots are examples; a Personal Agent with a cloud computer is usually easier to keep online for applying, scheduled checks, interview reminders, and tracking.
 
 1. Read `skill/hk-auto-apply/SKILL.md`.
 2. Save the entire `skill/hk-auto-apply` directory into the skill library, including `references/` and `scripts/`. Do not save only the `SKILL.md` text.
