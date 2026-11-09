@@ -1,0 +1,4 @@
+interface:
+  display_name: "hk-auto-apply"
+  short_description: "香港 JobsDB 与 LinkedIn 自动投递"
+  default_prompt: "请按 hk-auto-apply 开始香港求职自动投递。先告诉我还需要提供什么。"
