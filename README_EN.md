@@ -46,6 +46,7 @@ The bot collects files, facts, and preferences first, and only asks for whatever
 **Preferences**
 - JobsDB, LinkedIn, or both
 - Apply matching roles directly, or confirm a list first
+- When a role has no Quick Apply / Easy Apply and opens the company's own page: default spray mode (海王模式)—fill it if it is simple, skip if it is complex; or leave-no-company-behind mode, which tries every employer page (slower and more error-prone)
 - Run on the cloud computer, or on your own computer
 - Keep the tracker as local Excel, Google Sheets, Feishu / Lark, Notion, or another table you name (default: a local Excel file)
 - When the daily check should run (default: about 09:00 on weekdays in your timezone)

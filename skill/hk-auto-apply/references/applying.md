@@ -27,7 +27,11 @@
 
 ## 外部雇主申请页
 
-Apply 也可能跳到 PageUp、Workday、Avature、北森、Workable、Greenhouse、Taleo、Oracle HCM、Aplitrak 等。看一眼，简单就填，复杂就放弃，记成 `external_ats_complex`。外部申请放弃只算跳过，不算投出。
+没有 JobsDB Quick Apply 或 LinkedIn Easy Apply、要点进公司自己的申请页时，先看用户选的策略。没选就用默认的「海王模式」。Apply 也可能跳到 PageUp、Workday、Avature、北森、Workable、Greenhouse、Taleo、Oracle HCM、Aplitrak 等。
+
+### 海王模式（默认）
+
+看一眼，简单就填，复杂就不要纠结，直接跳过并记成 `external_ats_complex`。外部申请放弃只算跳过，不算投出。
 
 **可以填的简单页**大致是：字段不多，答案在简历或 intake 里都有；不用注册新账号；不用新设密码；一两页就能提交；提交后能看到明确的收到申请原文（例如 `Thanks for applying`、`Thank you for your submission`）。
 
@@ -40,6 +44,17 @@ Apply 也可能跳到 PageUp、Workday、Avature、北森、Workable、Greenhous
 - 流程明显填不完，或看不出怎样才算提交成功
 
 不要为了投递去猜一个密码，或在雇主网站上新开账号，除非用户明确要求这么做。
+
+### 一家都不能放过
+
+用户明确要求这个模式时，对每一家外部申请页都尽量跟下去：多页表单继续填，短暂的页面错误可以重试一次，不要因为流程比快捷投递长就立刻放弃。事先告诉用户：这会明显更慢，也更容易在登录墙、验证码、超时或页面结构变化上报错。
+
+即使在这个模式里：
+
+- 仍然不要编造年限、牌照、语言、地址、证件号或密码
+- 必填项简历和 intake 都答不了，记下来并跳过该岗，不要填假
+- 若必须注册新的雇主网站账号或设置密码，先告诉用户，不要擅自注册
+- 若要上传身份证、护照扫描件，或要录视频、做很长的测评，先告诉用户，不要自行发明材料
 
 ## 成功才算投出
 
