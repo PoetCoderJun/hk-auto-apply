@@ -16,7 +16,9 @@ A Personal Agent such as [Grok Bot](https://docs.x.ai/grok-bot/skills-routines-a
 
 The application log and research note do not have to live in Notion. You can keep or export them as a local Excel workbook, a Google Sheet, a Feishu / Lark sheet, or any other table you name.
 
-## One message in Grok Bot
+## One message to your agent
+
+Paste this into any Personal Agent or local agent that supports Browser Use / Computer Use, such as Grok Bot or OpenAI Dots:
 
 ```text
 Please install this GitHub skill: https://github.com/PoetCoderJun/hk-auto-apply
@@ -24,7 +26,7 @@ Please install this GitHub skill: https://github.com/PoetCoderJun/hk-auto-apply
 Read START.md and save the entire skill/hk-auto-apply directory to my skill library (SKILL.md, references, and scripts — not SKILL.md alone). Then tell me what I still need to provide.
 ```
 
-Then send a resume and describe or upload the role scope. Other assistants that can install a GitHub skill and drive Browser Use / Computer Use can use the same files.
+Then send a resume and describe or upload the role scope.
 
 ## What you get
 

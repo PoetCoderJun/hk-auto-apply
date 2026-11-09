@@ -16,7 +16,9 @@
 
 投递记录和分析报告不必写成 Notion 文档。可以导出或维护为本地 Excel、Google 表格、飞书表格，或你指定的其他表格。
 
-## 和 Grok Bot 说一句话就行
+## 对助手说一句话就行
+
+在任何支持 Browser Use / Computer Use 的 Personal Agent 或本地 Agent 里，发下面这段即可，例如 Grok Bot 或 OpenAI Dots：
 
 ```text
 请安装这个 GitHub 技能：https://github.com/PoetCoderJun/hk-auto-apply
@@ -24,7 +26,7 @@
 请读取 START.md，并把仓库里的 skill/hk-auto-apply 完整保存到我的技能库（包括 SKILL.md、references 和 scripts，不要只复制 SKILL.md）。保存后告诉我还需要提供什么。
 ```
 
-然后交一份简历，再说清或上传岗位范围。其他支持安装 GitHub 技能、并且能做 Browser Use / Computer Use 的助手，也可以用同一套文件。
+然后交一份简历，再说清或上传岗位范围。
 
 ## 你会得到什么
 
