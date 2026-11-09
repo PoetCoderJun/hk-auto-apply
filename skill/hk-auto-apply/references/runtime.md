@@ -23,4 +23,4 @@
 
 LinkedIn/JobsDB 域冷却或分区 `next_retry_at` 未到之前，不要 busy-wait 或缩短间隔重试。把 `evidence/rate_limit_state.json` 与 `search_coverage.json` 里的时间写入进度汇报；用宿主支持的 **schedule / 定时任务** 在到点后自动续跑；若当前环境不支持，明确告诉用户「已暂停至 HH:MM（时区）」。
 
-续跑时先读 [search-coverage.md](search-coverage.md) 与 [queue.md](queue.md)：从失败游标和 `deferred.jsonl` 继续，不要无视未完成的 truncated 分区。同一账号、同一时刻仍只保留一个进行中的搜岗/JD 顶层会话。
+续跑时先读 [search-coverage.md](search-coverage.md) 与 [queue.md](queue.md)：backfill 缺口写 `search_coverage_backfill.json`，增量写 `search_coverage_incremental.json`；从失败游标和 `deferred.jsonl` 继续。在 backfill 未达完成条件前，不要用「增量已跑过」抵扣首轮覆盖。同一账号、同一时刻仍只保留一个进行中的搜岗/JD 顶层会话。

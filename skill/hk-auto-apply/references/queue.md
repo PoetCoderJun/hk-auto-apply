@@ -13,7 +13,9 @@
 | `evidence/pacing_config.json` | 节流参数（只可放慢） |
 | `evidence/request_log.jsonl` | 每次顶层请求的时间戳、域、状态码、Retry-After 是否出现 |
 | `evidence/rate_limit_state.json` | 域冷却、`next_allowed_at`、guest 窗口计数 |
-| `evidence/search_coverage.json` | 各 `partition_id` 的游标与 complete/truncated/deferred |
+| `evidence/search_coverage_backfill.json` | backfill 分区游标与状态 |
+| `evidence/search_coverage_incremental.json` | 每次增量任务的分区（与 backfill 分开） |
+| `evidence/campaign_state.json` | backfill / incremental 完成标记（可选） |
 | `evidence/pages/...` | 成功页快照或错误记录（无 PII） |
 | `discovered.jsonl` | 每发现一个岗一行 |
 | `deferred.jsonl` | 429/超时/JD 未读成功等，待重试（**不是**最终不投） |
@@ -66,9 +68,24 @@
 
 从队列移除前，若岗曾被 deferred，确认已写入 `deferred.jsonl` 或已转入终态，避免 silent drop。
 
+## 可投递（eligible）与首轮完成
+
+**可投递岗**同时满足：
+
+- 已在 `discovered.jsonl`（或当次增量等价发现记录）
+- JD 已当场读过且正文完整（非 `deferred` 的 `jd_fetch_*`）
+- 通过选岗规则，且未在 `apply_log` 有终态
+- 不在硬去重重复集合内
+
+这类岗应在 `apply_queue_remaining.json` 中排队；处理完写 `apply_log`，再从队列移除。
+
+**首轮（backfill）完成**（见 [search-coverage.md](search-coverage.md)）= backfill 计划分区全部 `complete` **且** 上述可投递岗全部进入 `apply_log` 终态。仅队列空 **不能** 证明完成。
+
+`deferred.jsonl` 中的岗在恢复为可投递之前，不参与「队列已清空」的完成判定。
+
 ## 批次与汇报
 
-首轮目标是在**计划内搜索范围**里，把能稳定读到 JD、且符合规则的可投岗处理完，不要在大约 20 份时自行停下。搜索分区仍有 `truncated`/`deferred` 时，队列可以为空，但 coverage **不算** done。
+首轮目标是在**计划内搜索范围**里，先完成 backfill 分区覆盖，再把所有可投递岗处理至终态；不要在大约 20 份时自行停下。搜索分区仍有 `truncated`/`deferred` 时，队列可以为空，但 coverage **不算** done，首轮 **不算** complete。
 
 大约每处理 50 个岗可做检查点汇报（已处理 / 成功 / 跳过 / deferred / 剩余 / 覆盖 summary）。这是汇报节奏，不是战役结束。
 

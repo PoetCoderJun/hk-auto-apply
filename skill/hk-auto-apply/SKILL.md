@@ -44,9 +44,9 @@ metadata:
 2. 只做用户点名的平台。说 JobsDB 和 LinkedIn、两个都投，或在 JobsDB 同等逻辑上加入 LinkedIn，就两边都全量海投并去重。只点其中一个时，不要自行扩到另一个，也不要扩到没点名的求职网站。
 3. 问清这次跑在云电脑还是用户自己的电脑，然后在那台电脑上完成登录。不要向用户要密码。
 4. 打开或创建带「平台」列的跟踪表。载体可以是本地 Excel、Google 表格、飞书、Notion 或用户指定的其他表；没指定就先做本地 Excel。双平台时，投之前先做去重。
-5. 第一次使用：在计划搜索范围内处理近约 30 天符合规则且 **JD 已可读** 的可投岗；搜岗/JD 遇 429 或超时时写入 deferred 与覆盖状态，不要假装已搜全 LinkedIn。把队列与 `evidence/` 落到磁盘上，有进度和卡点都及时告诉用户。
-6. 首轮结束后写完分析报告，并按用户确认的时间建立增量定时任务。
-7. 定时任务只处理上次之后新出现、或表里还没有的岗位；用同一套规则、去重和跟踪表；没有新的可投岗位时也发一条短消息。
+5. **Backfill（首轮存量）**：用 `evidence/search_coverage_backfill.json` 记录计划内分区；遇 429 写 deferred/截断，不假装搜齐全站。把所有 **可投递**（JD 已可读、符合规则、非 deferred）岗处理到 `apply_log` 终态。`apply_queue` 空但分区未 `complete` 或仍有 JD/search deferred → 首轮 **未完成**。
+6. 仅当 [references/search-coverage.md](references/search-coverage.md) 的 backfill 完成条件（覆盖 + 可投递队列）满足后，才写终版分析报告并称首轮结束；然后与用户确认增量时间、建立 **incremental** 定时任务（`search_coverage_incremental.json` 分开维护）。
+7. 定时任务只做 incremental：上次之后新岗或表里还没有的岗；单次结束分别标记当次搜索/投递是否完成；补历史 truncated 分区走 backfill 文件续跑，不与增量混表。
 
 ## 硬性约束
 
@@ -59,7 +59,7 @@ metadata:
 - 不要把整个待投队列预先写成「待投递」。中断后从已落盘的队列续跑，不要当新发现重新全网再扫一遍。
 - **节流**：同一招聘域同时只有一个进行中的顶层搜岗/JD 请求；遵守 [references/rate-limit-and-pacing.md](references/rate-limit-and-pacing.md) 的运行默认值（10–20s 间隔、guest 10 分钟 ≤20 次、换词 ≥60s）；429 后只许放慢不许加快；记录 `evidence/request_log.jsonl`（无凭证/PII）。可用 `python3 SKILL_DIR/scripts/pacing_gate.py self-check` 做离线自检。
 - **429 / 冷却**：尊重 `Retry-After`；无头时不编造等待时间；单请求最多 2 次回退后 deferred 或域冷却 30 分钟；连续 3 次 429 立即域冷却。冷却期间不轮询，用定时任务在 `next_retry_at` 续跑（见 [references/runtime.md](references/runtime.md)）。不用换号/代理/无头绕过限制。
-- **覆盖**：按 [references/search-coverage.md](references/search-coverage.md) 维护分区与游标；失败页从 `next_cursor` 续跑；队列空 ≠ 搜索完成。
+- **覆盖**：backfill 与 incremental 分文件；按 [references/search-coverage.md](references/search-coverage.md) 维护分区与游标；失败页从 `next_cursor` 续跑；队列空 ≠ 搜索完成；**首轮完成 = backfill 分区全 complete + 无非 deferred 的可投递岗未终态**。
 - **deferred**：JD 抓取 429/超时/疑似不完整 → `deferred.jsonl`，**不是** `apply_log` 的 `skipped`。仅硬不匹配、已核实关闭或用户接受遗漏才可 skipped。
 
 ## 交付
