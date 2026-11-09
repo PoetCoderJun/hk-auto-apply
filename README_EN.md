@@ -26,7 +26,7 @@ Then send a resume and describe or upload the role scope.
 
 ## What you get
 
-1. **Backlog apply**: submit matching, submittable Hong Kong roles from roughly the last 30 days, then write an analysis note and an application log.
+1. **Backlog apply**: submit matching, submittable Hong Kong roles within the planned search scope for roughly the last 30 days; honestly report truncated coverage when rate-limited, plus an analysis note and application log (not a guarantee of full-site coverage).
 2. **Cross-platform dedup**: when both platforms are in scope, the same company and substantially the same title are applied once.
 3. **Daily new roles**: incremental checks at the time you choose; matching roles are submitted, and you still get a short update when nothing new qualifies.
 

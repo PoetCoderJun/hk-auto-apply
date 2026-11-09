@@ -18,3 +18,9 @@
 如果用户主动在聊天里发了密码，也不要写回聊天或写进通用技能文本；优先仍请他们在这台电脑上自己输入，或自行接管登录。
 
 登录墙、验证码拿不到，或需要用户本人接管电脑时，马上告诉他们并等，不要假装已经投出。
+
+## 限流暂停与定时续跑
+
+LinkedIn/JobsDB 域冷却或分区 `next_retry_at` 未到之前，不要 busy-wait 或缩短间隔重试。把 `evidence/rate_limit_state.json` 与 `search_coverage.json` 里的时间写入进度汇报；用宿主支持的 **schedule / 定时任务** 在到点后自动续跑；若当前环境不支持，明确告诉用户「已暂停至 HH:MM（时区）」。
+
+续跑时先读 [search-coverage.md](search-coverage.md) 与 [queue.md](queue.md)：从失败游标和 `deferred.jsonl` 继续，不要无视未完成的 truncated 分区。同一账号、同一时刻仍只保留一个进行中的搜岗/JD 顶层会话。
