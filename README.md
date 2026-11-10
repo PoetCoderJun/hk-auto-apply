@@ -12,17 +12,27 @@
 
 一次任务会留下可追溯的岗位记录和分析报告。下面来自 2026 年 11 月的一次实际使用案例，展示的是该次搜索范围内的结果。
 
-### 投递记录
+<table>
+  <tr>
+    <td width="33%" align="center">
+      <strong>Grok Bot 聊天记录</strong><br>
+      <a href="docs/images/grok-bot-chat.png"><img src="docs/images/grok-bot-chat-thumb.png" alt="Grok Bot 汇报筛选、去重与投递队列进展" width="100%"></a><br>
+      查看筛选与投递进展
+    </td>
+    <td width="33%" align="center">
+      <strong>投递记录</strong><br>
+      <a href="docs/images/application-records.png"><img src="docs/images/application-records-thumb.png" alt="按已投递状态筛选的实际岗位记录" width="100%"></a><br>
+      按状态回查岗位与公司
+    </td>
+    <td width="33%" align="center">
+      <strong>岗位分析报告</strong><br>
+      <a href="docs/images/market-report.png"><img src="docs/images/market-report-thumb.png" alt="实际报告中的岗位方向、数量与市场观察" width="100%"></a><br>
+      了解岗位分布与市场观察
+    </td>
+  </tr>
+</table>
 
-按状态筛选岗位，查看公司、JD、发现日期和投递进度，收到 HR 联系后也能回查。
-
-![实际投递记录，展示已投递状态、公司、JD 链接和发现日期](docs/images/application-records.png)
-
-### 岗位分析报告
-
-除了记录申请结果，还能按方向整理岗位数量和市场观察，帮助你调整下一轮搜索范围。
-
-![实际报告中的岗位方向、数量与观察示例](docs/images/market-report.png)
+点击图片查看大图。
 
 *截图中的数量属于该次案例的候选名单，不能视为全市场岗位总量或通用投递成功率。截图已裁去浏览器和页面导航，未包含简历、账号或联系方式。表格工具可按你的偏好选择。*
 
