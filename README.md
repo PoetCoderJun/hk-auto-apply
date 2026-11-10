@@ -10,14 +10,14 @@
 
 ## 先看实际效果
 
-一次任务会留下可追溯的岗位记录和分析报告。下面来自 2026 年 11 月的一次实际使用案例，展示的是该次搜索范围内的结果。
+以下是在 Grok Bot 上运行的聊天记录截图、投递记录，以及投递过程中的岗位分析报告。
 
 <table>
   <tr>
     <td width="33%" align="center">
       <strong>Grok Bot 聊天记录</strong><br>
-      <a href="docs/images/grok-bot-chat.png"><img src="docs/images/grok-bot-chat-thumb.png" alt="Grok Bot 汇报筛选、去重与投递队列进展" width="100%"></a><br>
-      查看筛选与投递进展
+      <a href="docs/images/grok-bot-chat.png"><img src="docs/images/grok-bot-chat-thumb.png" alt="Grok Bot 完整界面，展示自动投递与每日新岗任务的聊天记录" width="100%"></a><br>
+      在 Grok Bot 中安排自动投递
     </td>
     <td width="33%" align="center">
       <strong>投递记录</strong><br>
@@ -33,8 +33,6 @@
 </table>
 
 点击图片查看大图。
-
-*截图中的数量属于该次案例的候选名单，不能视为全市场岗位总量或通用投递成功率。截图已裁去浏览器和页面导航，未包含简历、账号或联系方式。表格工具可按你的偏好选择。*
 
 ## 它怎样工作
 
