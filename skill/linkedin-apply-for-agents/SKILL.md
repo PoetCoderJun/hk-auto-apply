@@ -8,8 +8,10 @@ description: >-
   former name hk-auto-apply. Require the target location first. Always
   apply on LinkedIn with that location's geoId; if the location is Hong
   Kong, also apply on JobsDB automatically and never ask the user to
-  choose platforms. Collect files, facts, and preferences first. Never
-  ask for login passwords. Do not add job sites beyond this
+  choose platforms. Collect files, facts, and preferences first. Complete
+  login later on the computer used for the run; the user may
+  sign in themselves or give the agent the password or another
+  login method. Do not add job sites beyond this
   location-based rule.
 license: MIT
 metadata:
@@ -49,7 +51,7 @@ metadata:
    - 一律投 LinkedIn，并用该地区对应的 geoId 搜岗。
    - 地区是香港时，LinkedIn 使用 `geoId=103291313`，并自动同时投 JobsDB、做跨平台去重。告诉用户会同时投这两个平台，不要再问要不要加 JobsDB。
    - 其他地区只投 LinkedIn，按地名解析 geoId；不要自行加入 JobsDB 或其他招聘网站。
-3. 问清这次跑在云电脑还是用户自己的电脑，然后在那台电脑上完成登录。不要向用户要密码。
+3. 问清这次跑在云电脑还是用户自己的电脑，然后在那台电脑上完成登录。用户可以自行操作电脑登录，也可以把账号密码或登录方式交给你，由你在这台电脑上走登录流程。
 4. 打开或创建带「平台」列的跟踪表。载体可以是本地 Excel、Google 表格、飞书、Notion 或用户指定的其他表；没指定就先做本地 Excel。双平台时，投之前先做去重。
 5. **Backfill（首轮存量）**：用 `evidence/search_coverage_backfill.json` 记录计划内分区；遇 429 写 deferred/截断，不假装搜齐全站。把所有 **可投递**（JD 已可读、符合规则、非 deferred）岗处理到 `apply_log` 终态。首轮结束须：分区全 `complete`、`deferred.jsonl` 无未决 backfill JD/search 重试、可投递岗全终态；`apply_queue` 暂空不能单独证明完成。
 6. 仅当 [references/search-coverage.md](references/search-coverage.md) 的 backfill 完成条件（覆盖 + 可投递队列）满足后，才写终版分析报告并称首轮结束；然后与用户确认增量时间、建立 **incremental** 定时任务（`search_coverage_incremental.json` 分开维护）。
@@ -58,7 +60,7 @@ metadata:
 ## 硬性约束
 
 - 必须项未齐之前，不要开始搜岗或投递。投递地区未说明算必须项缺失，必须先问清。不要询问要投哪些平台。
-- 不要向用户索要 JobsDB 或 LinkedIn 的登录密码。如果他们主动发了密码，不要写回聊天，也不要写进通用技能文本。
+- 登录在实际使用的那台电脑上完成：用户可以自行操作电脑登录，也可以把账号密码或登录方式交给你，由你在这台电脑上走登录流程。如果他们发了密码，不要把密码写回聊天，也不要写进通用技能文本。
 - 只有看到成功确认，才把该岗记成已投递。
 - 没有站内快捷投递、要去公司自己申请页时：默认用海王模式，简单就填，复杂就跳过并记下原因；用户要求「一家都不能放过」时，再尽量跟完每一家外部页，并告知这会更慢、更容易出错。
 - 可选封面信就跳过；必填时只根据简历写一小段事实。必填字段不知道就跳过该岗，不要填假。

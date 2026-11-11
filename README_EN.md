@@ -49,7 +49,7 @@ The application log and research note do not have to live in Notion. You can kee
 
 ## What to prepare
 
-The bot only asks for whatever is still missing. Do not send login passwords.
+The bot only asks for whatever is still missing.
 
 **Files**
 - Resume (PDF or Word)
@@ -66,7 +66,7 @@ The bot only asks for whatever is still missing. Do not send login passwords.
 - Tracker as local Excel, Google Sheets, Feishu / Lark, Notion, or another table you name (default: local Excel)
 - When the weekday check should run (default: about 09:00 in your timezone)
 
-Sign-in happens on the computer used for the run: take it over and log in yourself, or let the assistant drive login there.
+Please sign in on the computer that will actually be used: you can take it over and log in yourself (the cloud computer or your own computer), or give the agent the account password or another login method so it can complete sign-in on that computer.
 
 ## License
 

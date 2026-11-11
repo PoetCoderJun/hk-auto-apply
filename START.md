@@ -13,5 +13,5 @@ The target location is required at the start. Always apply on LinkedIn using tha
 3. Keep the name and description from that `SKILL.md` unchanged.
 4. After it is saved, follow `skill/linkedin-apply-for-agents/references/intake.md`: tell the user what files, facts, and preferences they still need to provide. Do not start searching or applying yet.
 5. If the target location is missing, ask for it before searching or applying. If it is Hong Kong, tell the user that LinkedIn (Hong Kong geoId) and JobsDB will both be used; do not ask whether to include JobsDB. Never ask which platforms to use.
-6. Never ask for LinkedIn or JobsDB passwords.
+6. After materials are collected, complete login on the computer used for the run. The user may sign in themselves (cloud computer or their own computer), or give the agent the account password or another login method so it can complete the login flow there. Never write passwords back into the chat or into the skill.
 7. Do not copy anyone else's resume, salary, visa, or screening rules into this install. Wait for the current user's materials.
