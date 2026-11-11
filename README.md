@@ -1,101 +1,77 @@
-[简体中文](README.md) | [English](README_EN.md)
+[简体中文](README_ZH.md) | [English](README.md)
 
-# hk-auto-apply
+# linkedin-apply-for-agents
 
-给支持 Browser Use / Computer Use 的 Personal Agent 或本地 Agent 用的香港求职自动投递技能：在 [JobsDB](https://hk.jobsdb.com) 和 [LinkedIn](https://www.linkedin.com) 上，把符合你要求的岗位投完，再按约定时间检查新岗。
+Formerly `hk-auto-apply`. The previous GitHub URL still redirects here, and `hk-auto-apply` remains a skill alias.
 
-**简历 + 岗位范围 → 存量海投 + 跨平台去重 + 投递记录 / 分析报告 → 每个工作日增量投递**
+LinkedIn auto apply, as a skill for your personal agent.
 
-这不是 xAI 官方仓库。这里没有需要单独部署的服务，也不包含任何人的简历或账号。
+**Best on [Grok Bot](https://docs.x.ai/grok-bot/skills-routines-and-automations) or OpenAI Dots.** They have a cloud computer that can stay on around the clock, can automatically track application-related email, and can trigger the daily check and send you updates on their own.
 
-## 先看实际效果
+It also runs on ordinary agents that have Browser Use / Computer Use, such as Codex, Claude, Cursor, and Kimi.
 
-以下是在 Grok Bot 上运行的聊天记录截图、投递记录，以及投递过程中的岗位分析报告。
+![Turn your criteria into a running apply process](docs/images/workflow-en.svg)
 
 <table>
   <tr>
-    <td width="33%" align="center">
-      <strong>Grok Bot 聊天记录</strong><br>
-      <a href="docs/images/grok-bot-chat.png"><img src="docs/images/grok-bot-chat-thumb.png" alt="Grok Bot 完整界面，展示自动投递与每日新岗任务的聊天记录" width="100%"></a><br>
-      在 Grok Bot 中安排自动投递
+    <td width="33%" align="center" valign="top">
+      <strong>Conversation</strong><br>
+      <a href="docs/images/chat.png"><img src="docs/images/chat.png" alt="Example conversation: the user names Hong Kong, and the skill applies on LinkedIn and JobsDB without a platform picker" width="100%"></a>
     </td>
-    <td width="33%" align="center">
-      <strong>投递记录</strong><br>
-      <a href="docs/images/application-records.png"><img src="docs/images/application-records-thumb.png" alt="按已投递状态筛选的实际岗位记录" width="100%"></a><br>
-      按状态回查岗位与公司
+    <td width="33%" align="center" valign="top">
+      <strong>Application log</strong><br>
+      <a href="docs/images/records.png"><img src="docs/images/records.png" alt="Example application log with applied roles, companies, and platforms" width="100%"></a>
     </td>
-    <td width="33%" align="center">
-      <strong>岗位分析报告</strong><br>
-      <a href="docs/images/market-report.png"><img src="docs/images/market-report-thumb.png" alt="实际报告中的岗位方向、数量与市场观察" width="100%"></a><br>
-      了解岗位分布与市场观察
+    <td width="33%" align="center" valign="top">
+      <strong>Research note</strong><br>
+      <a href="docs/images/report.png"><img src="docs/images/report.png" alt="Example research note showing roles grouped by direction" width="100%"></a>
     </td>
   </tr>
 </table>
 
-点击图片查看大图。
+This is not an official xAI, OpenAI, or Anthropic repository. There is no service to deploy, and the repo does not include anyone's resume or account.
 
-## 它怎样工作
+## Install
 
-![从简历与求职条件，经搜索、阅读 JD、匹配与去重，到申请、记录和增量检查的流程](docs/images/workflow.svg)
-
-## 安装和使用方式
-
-本技能可以跑在任何支持 Browser Use / Computer Use 的 Personal Agent，或具备同等浏览器操作能力的本地 Agent 上。搜岗、登录和投递都依赖这种浏览器操作。
-
-更建议使用 Personal Agent，例如 [Grok Bot](https://docs.x.ai/grok-bot/skills-routines-and-automations) 或 OpenAI Dots。这类助手比较容易接上云电脑、保持在线，适合自动投递、按点检查新岗，以及后续的面试提醒和进度跟踪。本地 Agent 也可以用；如果投递跑在你自己的电脑上，使用期间和定时任务触发时都要开机在线。
-
-在任何支持 Browser Use / Computer Use 的 Personal Agent 或本地 Agent 里，发下面这段即可，例如 Grok Bot 或 OpenAI Dots：
+Paste this into any agent that supports Browser Use / Computer Use:
 
 ```text
-请安装这个 GitHub 技能：https://github.com/PoetCoderJun/hk-auto-apply
+Please install this GitHub skill: https://github.com/PoetCoderJun/linkedin-apply-for-agents
 
-请读取 START.md，并把仓库里的 skill/hk-auto-apply 完整保存到我的技能库（包括 SKILL.md、references 和 scripts，不要只复制 SKILL.md）。保存后告诉我还需要提供什么。
+Read START.md and save the entire skill/linkedin-apply-for-agents directory to my skill library (SKILL.md, references, and scripts — not SKILL.md alone). Then tell me what I still need to provide.
 ```
 
-然后交一份简历，再说清或上传岗位范围。
+Then send a resume, name the target location, and describe or upload the role scope.
 
-## 你会得到什么
+## What you get
 
-1. **存量海投**：在计划搜索范围内的香港岗位尽量投完；若遇平台限流会如实标出未覆盖分区，并写出分析报告和投递记录（不承诺搜齐全站）。
-2. **跨平台去重**：两个平台都投时，同一公司、实质相同的岗位只投一次。
-3. **每日新岗**：按你约定的时间做增量检查；有合适的就投，没有也会回一句。
+1. **Backlog apply**: finish as many matching roles as possible in the planned search scope for your target location; if a platform rate-limits the search, the uncovered slices are marked honestly, and you get a research note plus an application log (this is not a promise of full-site coverage).
+2. **Cross-platform dedup**: when both platforms are in scope, the same company and substantially the same role are applied to once.
+3. **Daily new roles**: incremental checks at the time you choose; matching roles are submitted, and you still get a short update when nothing new qualifies.
 
-投递记录和分析报告不必写成 Notion 文档。可以导出或维护为本地 Excel、Google 表格、飞书表格，或你指定的其他表格。
+The application log and research note do not have to live in Notion. You can keep or export them as a local Excel workbook, a Google Sheet, a Feishu / Lark sheet, or any other table you name.
 
-## 开投前请准备
+## What to prepare
 
-Bot 会按「文件 / 信息 / 偏好」收集材料，缺什么只追问缺的那几项。
+The bot only asks for whatever is still missing. Do not send login passwords.
 
-**文件**
-- 简历（PDF 或 Word）
-- 岗位范围：打字或上传选岗说明，要能读出优先、可考虑、硬性排除、软性提示
+**Files**
+- Resume (PDF or Word)
+- Role scope: typed text or a document that can be read as prefer / consider / hard exclude / soft flag
 
-**信息**（简历里有的不用再给）
-- 香港工作身份或签证、期望月薪、预计可入职时间
+**Facts** (skip anything already on the resume or in the role scope)
+- Target location (required at the start)
+- Work status or visa for that location, expected salary, and earliest start date
 
-**偏好**
-- 做 JobsDB、LinkedIn，还是两个都投
-- 符合要求是直接投，还是先确认名单
-- 没有 Quick Apply、要去公司自己申请页时：默认海王模式（简单就填，复杂就跳过）；也可以改成一家都不能放过（更慢、更容易出错）
-- 跑在云电脑，还是你自己的电脑
-- 跟踪表放在本地 Excel、Google 表格、飞书、Notion，还是你指定的其他表（没说就先给本地 Excel）
-- 日常增量检查几点跑（默认工作日早上大约 9:00，可改）
+**Preferences**
+- Apply matching roles directly, or confirm a list first
+- When a role has no Easy Apply / Quick Apply: default spray mode — fill it if it is simple, skip if it is complex
+- Run on the cloud computer, or on your own computer (keep it on and online if you choose your own)
+- Tracker as local Excel, Google Sheets, Feishu / Lark, Notion, or another table you name (default: local Excel)
+- When the weekday check should run (default: about 09:00 in your timezone)
 
-不要把登录密码发给 Bot。登录发生在实际使用的那台电脑上：你可以自行接管电脑登录，也可以让助手在这台电脑上走登录流程。选自己的电脑时，使用期间和定时任务触发时都要开机在线。
+Sign-in happens on the computer used for the run: take it over and log in yourself, or let the assistant drive login there.
 
-## 仓库结构
+## License
 
-```text
-START.md                         粘贴给助手的安装说明
-skill/hk-auto-apply/
-  SKILL.md                       入口：流程、硬性约束、该读哪份参考
-  agents/openai.yaml
-  references/                    收集资料、登录、平台、搜索、填表、队列、选岗、去重、报表
-  scripts/                       去重和 JD 信号提取
-```
-
-候选人是谁、选哪些岗、薪资和签证填什么，都以安装后你交来的材料为准，不会写死在技能里。
-
-## 许可
-
-[MIT](LICENSE)。与 xAI、SEEK/JobsDB、LinkedIn 无关联。
+[MIT](LICENSE). Not affiliated with xAI, OpenAI, Anthropic, SEEK/JobsDB, or LinkedIn.

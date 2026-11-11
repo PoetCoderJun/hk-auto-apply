@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    body { height: 750px; padding: 36px 48px; }
+    .frame {
+      height: 678px;
+      background: var(--card);
+      border-radius: 24px;
+      box-shadow: var(--shadow);
+      border: 1px solid var(--line);
+      padding: 28px 32px 18px;
+      display: flex;
+      flex-direction: column;
+    }
+    h1 { font-size: 22px; letter-spacing: -0.03em; margin-bottom: 6px; }
+    .lede { font-size: 15px; color: var(--muted); margin-bottom: 28px; }
+    .lede strong { color: var(--ink); font-weight: 650; }
+    .row {
+      display: grid;
+      grid-template-columns: 280px 1fr 70px;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 28px;
+    }
+    .label { font-size: 15px; font-weight: 650; }
+    .note { font-size: 12px; color: var(--muted); font-weight: 400; margin-top: 2px; }
+    .track {
+      height: 14px;
+      background: #eef3f6;
+      border-radius: 999px;
+      overflow: hidden;
+    }
+    .bar { height: 100%; border-radius: 999px; background: var(--accent); }
+    .count { font-size: 16px; font-weight: 700; text-align: right; font-variant-numeric: tabular-nums; }
+    .signal {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 650;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      border-radius: 999px;
+      padding: 2px 7px;
+      margin-left: 6px;
+    }
+    .hot { background: var(--success-bg); color: var(--success); }
+    .cool { background: #f3efe6; color: #8a6a28; }
+    footer { margin-top: auto; font-size: 12px; color: var(--soft); }
+  </style>
+</head>
+<body>
+  <div class="frame">
+    <h1>Roles by direction</h1>
+    <p class="lede"><strong>251 roles</strong> in the core list, excluding 24 research-assistant postings that were mostly noise.</p>
+
+    <div class="row">
+      <div>
+        <div class="label">Banking RM / Wealth <span class="signal hot">Active</span></div>
+        <div class="note">Regional banks and brokers hiring ARM / RMA</div>
+      </div>
+      <div class="track"><div class="bar" style="width:100%"></div></div>
+      <div class="count">79</div>
+    </div>
+    <div class="row">
+      <div>
+        <div class="label">Fintech / BA / Ops <span class="signal hot">Active</span></div>
+        <div class="note">Many ads; commercial BA vs technical BA differ</div>
+      </div>
+      <div class="track"><div class="bar" style="width:96%"></div></div>
+      <div class="count">76</div>
+    </div>
+    <div class="row">
+      <div>
+        <div class="label">Asset mgmt / KYC <span class="signal hot">Active</span></div>
+        <div class="note">Brand graduate programs; KYC often mid-level</div>
+      </div>
+      <div class="track"><div class="bar" style="width:46%"></div></div>
+      <div class="count">36</div>
+    </div>
+    <div class="row">
+      <div>
+        <div class="label">Research / IB / Markets <span class="signal cool">Tight</span></div>
+        <div class="note">Mostly university research posts; few junior seats</div>
+      </div>
+      <div class="track"><div class="bar" style="width:42%"></div></div>
+      <div class="count">33</div>
+    </div>
+    <div class="row">
+      <div>
+        <div class="label">Strategy / coverage <span class="signal cool">Tight</span></div>
+        <div class="note">Selective titles, slower hiring cycle</div>
+      </div>
+      <div class="track"><div class="bar" style="width:22%"></div></div>
+      <div class="count">17</div>
+    </div>
+    <div class="row">
+      <div>
+        <div class="label">Other matching roles</div>
+        <div class="note">Still in scope, spread across smaller buckets</div>
+      </div>
+      <div class="track"><div class="bar" style="width:13%"></div></div>
+      <div class="count">10</div>
+    </div>
+
+    <footer>Illustration · example research note, not a live screenshot</footer>
+  </div>
+</body>
+</html>

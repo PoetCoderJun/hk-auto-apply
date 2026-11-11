@@ -1,4 +1,4 @@
-# LinkedIn 搜岗（香港，近约 30 天）
+# LinkedIn 搜岗（目标地区，近约 30 天）
 
 只负责发现岗位卡片。域级节流与 429 见 [rate-limit-and-pacing.md](rate-limit-and-pacing.md)。分区覆盖与续跑见 [search-coverage.md](search-coverage.md)。填写申请见 [applying.md](applying.md)。中断后续跑见 [queue.md](queue.md)。
 
@@ -10,8 +10,9 @@
 https://www.linkedin.com/jobs-guest/jobs/api/seeMoreJobPostings/search?keywords={URL编码的词}&geoId=103291313&f_TPR=r2592000&sortBy=DD&start=0
 ```
 
-- 香港用 `geoId=103291313`（Hong Kong SAR）。查其他地点：`https://www.linkedin.com/jobs-guest/api/typeaheadHits?query={地名}&typeaheadType=GEO`
-- 也可以加 `location=Hong%20Kong%20SAR`，但香港海投以这个 geoId 为准，避免范围漂到邻近地区。
+- 必须先有用户确认的投递地区，再代入对应 `geoId`，不要默认香港。
+- 地区是香港（Hong Kong / Hong Kong SAR）时，用 `geoId=103291313`。也可以加 `location=Hong%20Kong%20SAR`，但以这个 geoId 为准，避免范围漂到邻近地区。
+- 其他地区用 `https://www.linkedin.com/jobs-guest/api/typeaheadHits?query={地名}&typeaheadType=GEO` 查出 geoId，再写入搜索 URL。查不到就停下来问清地点，不要沿用香港 geoId。
 - `f_TPR=r2592000` 是近约 30 天；`r86400` 是一天，`r604800` 是一周。首轮存量用 30 天；增量按上次之后的窗口即可（可与旧 backfill 时间窗重叠，用岗位 ID 去重）。
 - `sortBy=DD` 表示最新优先。
 - 每页大约 10 张卡片；`count` 参数通常被忽略。用 `start=0`、`10`、`20`… 翻页。某一页少于 10 张，且 HTTP 成功，才可将该分区标为 `complete`。
@@ -29,14 +30,14 @@ Guest 顶层请求必须遵守 [rate-limit-and-pacing.md](rate-limit-and-pacing.
 
 ## 429、截断与已登录回退
 
-实战里常见：部分关键词在翻过若干页后开始 HTTP 429，甚至 36/36 个词都被截断；JD 抓取也会 429。**不能**把不完整覆盖说成「香港近 30 天的全部岗位」。
+实战里常见：部分关键词在翻过若干页后开始 HTTP 429，甚至 36/36 个词都被截断；JD 抓取也会 429。**不能**把不完整覆盖说成「该地区近 30 天的全部岗位」。
 
 收到 429 时：
 
 1. 按 [rate-limit-and-pacing.md](rate-limit-and-pacing.md) 落盘日志、`Retry-After`（若有）、回退与可能的 30 分钟域冷却。
 2. 将该 `partition_id` 标为 `truncated` 或 `deferred`，`next_cursor` 停在失败的那一页。
 3. 换关键词前至少等待配置的 `min_gap_between_keywords_sec`。
-4. 若连续多个词一开始就 429、或 guest 返回 Cloudflare 挑战页，在**用户已授权的已登录**浏览器里，用同样的词、地点和近 30 天筛选搜岗：`https://www.linkedin.com/jobs/search/?keywords=...&geoId=103291313&f_TPR=r2592000&sortBy=DD`。这是 guest 不可用时的正当主路径或回退，不是为了绕过冷却而换通道。
+4. 若连续多个词一开始就 429、或 guest 返回 Cloudflare 挑战页，在**用户已授权的已登录**浏览器里，用同样的词、已解析的 geoId 和近 30 天筛选搜岗：`https://www.linkedin.com/jobs/search/?keywords=...&geoId={已解析的geoId}&f_TPR=r2592000&sortBy=DD`。地区是香港时，这里的 geoId 必须是 `103291313`。这是 guest 不可用时的正当主路径或回退，不是为了绕过冷却而换通道。
 5. 已登录侧仍被限流或要求验证：停止该路由，告诉用户；不要用多账号、代理或无头模式绕过。
 
 汇报漏斗时列出：`complete` / `truncated` / `deferred` 分区数、各词最后成功的 `start`、以及 429 次数。队列已空 **不等于** 搜索覆盖已完成。

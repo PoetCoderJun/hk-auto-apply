@@ -1,0 +1,32 @@
+@font-face {
+  font-family: Inter;
+  src: url("fonts/Inter.ttf") format("truetype");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: block;
+}
+
+:root {
+  --bg: #edf3f7;
+  --ink: #173a4c;
+  --muted: #476575;
+  --soft: #6b8491;
+  --line: #d0dee6;
+  --accent: #39758d;
+  --accent-2: #2f647a;
+  --accent-soft: #e7f0f4;
+  --success: #187a56;
+  --success-bg: #e5f6ee;
+  --card: #ffffff;
+  --shadow: 0 16px 40px rgba(23, 58, 76, 0.08);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body {
+  width: 1200px;
+  overflow: hidden;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: Inter, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}

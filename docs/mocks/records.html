@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    body { height: 750px; padding: 36px 48px; }
+    .frame {
+      height: 678px;
+      background: var(--card);
+      border-radius: 24px;
+      box-shadow: var(--shadow);
+      border: 1px solid var(--line);
+      padding: 26px 28px 18px;
+      display: flex;
+      flex-direction: column;
+    }
+    .top { display: flex; align-items: flex-end; justify-content: space-between; margin-bottom: 18px; }
+    h1 { font-size: 22px; letter-spacing: -0.03em; }
+    .top .meta { font-size: 14px; color: var(--muted); }
+    .filters { display: flex; gap: 8px; margin-bottom: 16px; }
+    .chip {
+      font-size: 13px;
+      font-weight: 600;
+      border-radius: 999px;
+      padding: 6px 12px;
+      background: #f3f7f9;
+      color: var(--muted);
+    }
+    .chip.on { background: var(--success-bg); color: var(--success); }
+    table { width: 100%; border-collapse: collapse; }
+    th {
+      text-align: left;
+      font-size: 11px;
+      font-weight: 650;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--soft);
+      padding: 0 10px 10px;
+      border-bottom: 1px solid var(--line);
+    }
+    td {
+      font-size: 14.5px;
+      padding: 11px 10px;
+      border-bottom: 1px solid #eaf1f4;
+      vertical-align: middle;
+    }
+    tr:last-child td { border-bottom: none; }
+    .role { font-weight: 650; }
+    .status {
+      display: inline-block;
+      font-size: 12px;
+      font-weight: 650;
+      color: var(--success);
+      background: var(--success-bg);
+      border-radius: 999px;
+      padding: 3px 8px;
+    }
+    .muted { color: var(--muted); }
+    .link { color: var(--accent-2); font-variant-numeric: tabular-nums; }
+    footer { margin-top: auto; font-size: 12px; color: var(--soft); padding-top: 8px; }
+  </style>
+</head>
+<body>
+  <div class="frame">
+    <div class="top">
+      <h1>Application log</h1>
+      <div class="meta">11 applied · LinkedIn and JobsDB, de-duplicated</div>
+    </div>
+    <div class="filters">
+      <span class="chip on">Applied</span>
+      <span class="chip">Skipped</span>
+      <span class="chip">Needs review</span>
+    </div>
+    <table>
+      <thead>
+        <tr>
+          <th>Role</th>
+          <th>Status</th>
+          <th>Company</th>
+          <th>Platform</th>
+          <th>Location</th>
+          <th>Found</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td class="role">Client Relationship Officer</td><td><span class="status">Applied</span></td><td>Hang Seng</td><td class="muted">LinkedIn</td><td class="muted">Hong Kong</td><td class="link">Nov 9</td></tr>
+        <tr><td class="role">Analyst, Customer Services</td><td><span class="status">Applied</span></td><td>HSBC</td><td class="muted">JobsDB</td><td class="muted">Hong Kong</td><td class="link">Nov 9</td></tr>
+        <tr><td class="role">Due Diligence and Investigations</td><td><span class="status">Applied</span></td><td>Kroll</td><td class="muted">LinkedIn</td><td class="muted">Hong Kong</td><td class="link">Nov 9</td></tr>
+        <tr><td class="role">Accounting Officer</td><td><span class="status">Applied</span></td><td>S-RM</td><td class="muted">LinkedIn</td><td class="muted">Hong Kong</td><td class="link">Nov 9</td></tr>
+        <tr><td class="role">Senior Associate, Fund Reporting</td><td><span class="status">Applied</span></td><td>Grand Alliance</td><td class="muted">LinkedIn</td><td class="muted">Hong Kong</td><td class="link">Nov 9</td></tr>
+        <tr><td class="role">AI Product Manager</td><td><span class="status">Applied</span></td><td>Vocalbeats</td><td class="muted">LinkedIn</td><td class="muted">Hong Kong</td><td class="link">Nov 9</td></tr>
+        <tr><td class="role">Management Trainee</td><td><span class="status">Applied</span></td><td>Regal Hotels</td><td class="muted">JobsDB</td><td class="muted">Hong Kong</td><td class="link">Nov 9</td></tr>
+        <tr><td class="role">Global Operations Manager</td><td><span class="status">Applied</span></td><td>Plaza Premium Group</td><td class="muted">LinkedIn</td><td class="muted">Hong Kong</td><td class="link">Nov 9</td></tr>
+        <tr><td class="role">Assistant Analyst, FP&amp;A</td><td><span class="status">Applied</span></td><td>Tory Burch</td><td class="muted">LinkedIn</td><td class="muted">Hong Kong</td><td class="link">Nov 9</td></tr>
+        <tr><td class="role">Graduate Program, Risk &amp; Compliance</td><td><span class="status">Applied</span></td><td>EY</td><td class="muted">JobsDB</td><td class="muted">Hong Kong</td><td class="link">Nov 9</td></tr>
+      </tbody>
+    </table>
+    <footer>Illustration · example log, not a live screenshot</footer>
+  </div>
+</body>
+</html>

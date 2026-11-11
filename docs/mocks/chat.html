@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    body { height: 750px; padding: 36px 48px; }
+    .frame {
+      height: 678px;
+      background: var(--card);
+      border-radius: 24px;
+      box-shadow: var(--shadow);
+      border: 1px solid var(--line);
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+    header {
+      padding: 20px 28px 16px;
+      border-bottom: 1px solid var(--line);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    header h1 { font-size: 18px; font-weight: 700; letter-spacing: -0.02em; }
+    header .meta { font-size: 13px; color: var(--muted); margin-top: 2px; }
+    .pills { display: flex; gap: 8px; }
+    .pill {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--accent-2);
+      background: var(--accent-soft);
+      border-radius: 999px;
+      padding: 5px 10px;
+    }
+    .thread {
+      flex: 1;
+      padding: 24px 32px 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    .composer {
+      margin: 0 28px 8px;
+      border: 1px solid var(--line);
+      background: #f7fafb;
+      border-radius: 16px;
+      padding: 14px 16px;
+      color: var(--soft);
+      font-size: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .send {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: var(--accent);
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+    }
+    .row { display: flex; }
+    .row.user { justify-content: flex-end; }
+    .bubble {
+      max-width: 680px;
+      border-radius: 18px;
+      padding: 14px 18px;
+      font-size: 16px;
+      line-height: 1.45;
+    }
+    .row.user .bubble {
+      background: var(--accent);
+      color: #fff;
+      border-bottom-right-radius: 6px;
+    }
+    .row.agent .bubble {
+      background: #f3f7f9;
+      color: var(--ink);
+      border-bottom-left-radius: 6px;
+    }
+    .bubble p + p { margin-top: 10px; }
+    .card {
+      margin-top: 12px;
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 12px 14px;
+    }
+    .card .kicker {
+      font-size: 11px;
+      font-weight: 650;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 4px;
+    }
+    .card strong { font-weight: 650; }
+    footer {
+      padding: 12px 28px 16px;
+      font-size: 12px;
+      color: var(--soft);
+    }
+  </style>
+</head>
+<body>
+  <div class="frame">
+    <header>
+      <div>
+        <h1>Auto apply</h1>
+        <div class="meta">First setup</div>
+      </div>
+      <div class="pills">
+        <span class="pill">Hong Kong</span>
+        <span class="pill">LinkedIn + JobsDB</span>
+      </div>
+    </header>
+    <div class="thread">
+      <div class="row user">
+        <div class="bubble">Here’s my resume and role scope. I want to apply in Hong Kong.</div>
+      </div>
+      <div class="row agent">
+        <div class="bubble">
+          <p>Got it — the location is Hong Kong, so I’ll apply on LinkedIn with the Hong Kong geo ID, and on JobsDB as well. You don’t need to pick platforms.</p>
+          <p>Send any missing facts (work authorization, salary, start date), and say whether I should apply matching roles directly. I’ll work through about the last 30 days, then check for new ones on weekdays.</p>
+          <div class="card">
+            <div class="kicker">Scheduled</div>
+            <div><strong>Weekday new-role check</strong> · about 09:00 in your timezone</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="composer"><span>Message</span><span class="send">↑</span></div>
+    <footer>Illustration · example conversation, not a live screenshot</footer>
+  </div>
+</body>
+</html>

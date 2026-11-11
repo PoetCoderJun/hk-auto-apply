@@ -2,7 +2,7 @@
 <title id="title">从求职条件到持续投递</title><desc id="desc">简历与求职条件输入 Agent，搜索 JobsDB 与 LinkedIn，阅读 JD 并判断匹配，跨平台去重后申请，记录结果并按约定检查新岗。未匹配或需人工处理的岗位单独记录。</desc>
 <rect width="1200" height="520" rx="20" fill="#edf3f7"/>
 <g font-family="sans-serif" fill="#173a4c">
-<text x="58" y="60" font-size="17" letter-spacing="3">HK AUTO APPLY</text>
+<text x="58" y="60" font-size="17" letter-spacing="3">LINKEDIN AUTO APPLY</text>
 <text x="58" y="114" font-size="37" font-weight="700">把求职条件，变成持续推进的投递流程</text>
 <text x="58" y="151" font-size="19" fill="#476575">Browser Use / Computer Use · JobsDB + LinkedIn</text>
 <g fill="none" stroke="#759faf" stroke-width="2">
