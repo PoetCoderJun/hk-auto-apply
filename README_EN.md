@@ -2,8 +2,6 @@
 
 # linkedin-apply-for-agents
 
-Formerly `hk-auto-apply`. The previous GitHub URL still redirects here, and `hk-auto-apply` remains a skill alias.
-
 LinkedIn auto apply, as a skill for your personal agent.
 
 **Best on [Grok Bot](https://docs.x.ai/grok-bot/skills-routines-and-automations) or OpenAI Dots.** They have a cloud computer that can stay on around the clock, can automatically track application-related email, and can trigger the daily check and send you updates on their own.

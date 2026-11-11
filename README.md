@@ -2,8 +2,6 @@
 
 # linkedin-apply-for-agents
 
-原名 `hk-auto-apply`。旧的 GitHub 地址会自动跳转到本仓库，技能名 `hk-auto-apply` 仍作为别名保留。
-
 给个人 Agent 用的 LinkedIn 自动投递技能。
 
 **最建议用 [Grok Bot](https://docs.x.ai/grok-bot/skills-routines-and-automations) 或 OpenAI Dots。** 它们有可 24 小时开机的云电脑，能自动跟踪投递相关邮件，也能主动每天触发并主动反馈。
