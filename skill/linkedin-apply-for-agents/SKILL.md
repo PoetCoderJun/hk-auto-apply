@@ -2,19 +2,14 @@
 name: linkedin-apply-for-agents
 description: >-
   Starts LinkedIn auto-apply after the user provides a resume, a target
-  location, and a job scope. Use when installing this GitHub skill, or
-  when the user mentions auto apply, mass apply, LinkedIn Easy Apply, hk-auto-apply,
-  job applications, 海投, 自动投简历, or weekday checks for new postings.
-  The target location is required at the start. Always apply on LinkedIn
-  using that location's geoId. If the location is Hong Kong, also apply
-  on JobsDB automatically; never ask whether to include JobsDB, and never
-  ask the user to choose platforms. Collects files, facts, and
-  preferences first and chases any gaps. Works best on Grok Bot or
-  OpenAI Dots (always-on cloud computer, application-email tracking,
-  and proactive daily checks). Also runs on ordinary agents with
-  Browser Use or Computer Use, such as Codex, Claude, Cursor, and
-  Kimi, on a cloud computer or the user's own computer, and never
-  asks for login passwords. Do not add job sites beyond this
+  location, and a job scope. Use when installing this skill, or when the
+  user mentions auto apply, mass apply, LinkedIn Easy Apply, job
+  applications, 海投, 自动投简历, weekday checks for new postings, or the
+  former name hk-auto-apply. Require the target location first. Always
+  apply on LinkedIn with that location's geoId; if the location is Hong
+  Kong, also apply on JobsDB automatically and never ask the user to
+  choose platforms. Collect files, facts, and preferences first. Never
+  ask for login passwords. Do not add job sites beyond this
   location-based rule.
 license: MIT
 metadata:

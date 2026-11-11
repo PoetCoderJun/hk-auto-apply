@@ -2,7 +2,7 @@
 
 # linkedin-apply-for-agents
 
-LinkedIn auto apply, as a skill for your personal agent.
+LinkedIn auto apply, as a skill for your personal agent. If the target location is Hong Kong, it also applies on JobsDB automatically — you don't choose platforms.
 
 **Best on [Grok Bot](https://docs.x.ai/grok-bot/skills-routines-and-automations) or OpenAI Dots.** They have a cloud computer that can stay on around the clock, can automatically track application-related email, and can trigger the daily check and send you updates on their own.
 

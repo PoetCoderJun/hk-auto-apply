@@ -1,4 +1,4 @@
 interface:
-  display_name: "linkedin-apply-for-agents"
+  display_name: "LinkedIn Auto Apply"
   short_description: "LinkedIn auto apply skill for personal agents"
-  default_prompt: "Please start LinkedIn auto-apply with linkedin-apply-for-agents. First tell me what I still need to provide."
+  default_prompt: "Use $linkedin-apply-for-agents to start LinkedIn auto-apply. First tell me what I still need to provide."

@@ -7,7 +7,7 @@
 公开接口，不必带登录 cookie：
 
 ```
-https://www.linkedin.com/jobs-guest/jobs/api/seeMoreJobPostings/search?keywords={URL编码的词}&geoId=103291313&f_TPR=r2592000&sortBy=DD&start=0
+https://www.linkedin.com/jobs-guest/jobs/api/seeMoreJobPostings/search?keywords={URL编码的词}&geoId={已解析的geoId}&f_TPR=r2592000&sortBy=DD&start=0
 ```
 
 - 必须先有用户确认的投递地区，再代入对应 `geoId`，不要默认香港。
