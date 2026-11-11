@@ -1,77 +1,77 @@
-[简体中文](README_ZH.md) | [English](README.md)
+[简体中文](README.md) | [English](README_EN.md)
 
 # linkedin-apply-for-agents
 
-Formerly `hk-auto-apply`. The previous GitHub URL still redirects here, and `hk-auto-apply` remains a skill alias.
+原名 `hk-auto-apply`。旧的 GitHub 地址会自动跳转到本仓库，技能名 `hk-auto-apply` 仍作为别名保留。
 
-LinkedIn auto apply, as a skill for your personal agent.
+给个人 Agent 用的 LinkedIn 自动投递技能。
 
-**Best on [Grok Bot](https://docs.x.ai/grok-bot/skills-routines-and-automations) or OpenAI Dots.** They have a cloud computer that can stay on around the clock, can automatically track application-related email, and can trigger the daily check and send you updates on their own.
+**最建议用 [Grok Bot](https://docs.x.ai/grok-bot/skills-routines-and-automations) 或 OpenAI Dots。** 它们有可 24 小时开机的云电脑，能自动跟踪投递相关邮件，也能主动每天触发并主动反馈。
 
-It also runs on ordinary agents that have Browser Use / Computer Use, such as Codex, Claude, Cursor, and Kimi.
+其次是具备 Browser Use / Computer Use 能力的普通 Agent，例如 Codex、Claude、Cursor、Kimi。
 
-![Turn your criteria into a running apply process](docs/images/workflow-en.svg)
+![从求职条件到持续推进的投递流程](docs/images/workflow.svg)
 
 <table>
   <tr>
     <td width="33%" align="center" valign="top">
-      <strong>Conversation</strong><br>
-      <a href="docs/images/chat.png"><img src="docs/images/chat.png" alt="Example conversation: the user names Hong Kong, and the skill applies on LinkedIn and JobsDB without a platform picker" width="100%"></a>
+      <strong>对话</strong><br>
+      <a href="docs/images/chat.png"><img src="docs/images/chat.png" alt="示意图：用户说明在香港求职后，技能自动在 LinkedIn 和 JobsDB 投递，无需选择平台" width="100%"></a>
     </td>
     <td width="33%" align="center" valign="top">
-      <strong>Application log</strong><br>
-      <a href="docs/images/records.png"><img src="docs/images/records.png" alt="Example application log with applied roles, companies, and platforms" width="100%"></a>
+      <strong>投递记录</strong><br>
+      <a href="docs/images/records.png"><img src="docs/images/records.png" alt="示意图：已投递岗位、公司和平台的记录表" width="100%"></a>
     </td>
     <td width="33%" align="center" valign="top">
-      <strong>Research note</strong><br>
-      <a href="docs/images/report.png"><img src="docs/images/report.png" alt="Example research note showing roles grouped by direction" width="100%"></a>
+      <strong>岗位分析</strong><br>
+      <a href="docs/images/report.png"><img src="docs/images/report.png" alt="示意图：按方向汇总的岗位分析" width="100%"></a>
     </td>
   </tr>
 </table>
 
-This is not an official xAI, OpenAI, or Anthropic repository. There is no service to deploy, and the repo does not include anyone's resume or account.
+这不是 xAI、OpenAI 或 Anthropic 的官方仓库。这里没有需要单独部署的服务，也不包含任何人的简历或账号。
 
-## Install
+## 安装
 
-Paste this into any agent that supports Browser Use / Computer Use:
+在支持 Browser Use / Computer Use 的 Agent 里发送：
 
 ```text
-Please install this GitHub skill: https://github.com/PoetCoderJun/linkedin-apply-for-agents
+请安装这个 GitHub 技能：https://github.com/PoetCoderJun/linkedin-apply-for-agents
 
-Read START.md and save the entire skill/linkedin-apply-for-agents directory to my skill library (SKILL.md, references, and scripts — not SKILL.md alone). Then tell me what I still need to provide.
+请读取 START.md，并把仓库里的 skill/linkedin-apply-for-agents 完整保存到我的技能库（包括 SKILL.md、references 和 scripts，不要只复制 SKILL.md）。保存后告诉我还需要提供什么。
 ```
 
-Then send a resume, name the target location, and describe or upload the role scope.
+然后交一份简历，并说明投递地区和岗位范围。
 
-## What you get
+## 你会得到什么
 
-1. **Backlog apply**: finish as many matching roles as possible in the planned search scope for your target location; if a platform rate-limits the search, the uncovered slices are marked honestly, and you get a research note plus an application log (this is not a promise of full-site coverage).
-2. **Cross-platform dedup**: when both platforms are in scope, the same company and substantially the same role are applied to once.
-3. **Daily new roles**: incremental checks at the time you choose; matching roles are submitted, and you still get a short update when nothing new qualifies.
+1. **存量海投**：在计划搜索范围内的目标地区岗位尽量投完；若遇平台限流会如实标出未覆盖分区，并写出分析报告和投递记录（不承诺搜齐全站）。
+2. **跨平台去重**：两个平台都投时，同一公司、实质相同的岗位只投一次。
+3. **每日新岗**：按你约定的时间做增量检查；有合适的就投，没有也会回一句。
 
-The application log and research note do not have to live in Notion. You can keep or export them as a local Excel workbook, a Google Sheet, a Feishu / Lark sheet, or any other table you name.
+投递记录和分析报告不必写成 Notion 文档。可以导出或维护为本地 Excel、Google 表格、飞书表格，或你指定的其他表格。
 
-## What to prepare
+## 开投前请准备
 
-The bot only asks for whatever is still missing. Do not send login passwords.
+Bot 只追问仍然缺少的项。不要把登录密码发给 Bot。
 
-**Files**
-- Resume (PDF or Word)
-- Role scope: typed text or a document that can be read as prefer / consider / hard exclude / soft flag
+**文件**
+- 简历（PDF 或 Word）
+- 岗位范围：打字或上传选岗说明，要能读出优先、可考虑、硬性排除、软性提示
 
-**Facts** (skip anything already on the resume or in the role scope)
-- Target location (required at the start)
-- Work status or visa for that location, expected salary, and earliest start date
+**信息**（简历或岗位范围里有的不用再给）
+- 投递地区（必须，一开始就要说明）
+- 该地区的工作身份或签证、期望薪资、预计可入职时间
 
-**Preferences**
-- Apply matching roles directly, or confirm a list first
-- When a role has no Easy Apply / Quick Apply: default spray mode — fill it if it is simple, skip if it is complex
-- Run on the cloud computer, or on your own computer (keep it on and online if you choose your own)
-- Tracker as local Excel, Google Sheets, Feishu / Lark, Notion, or another table you name (default: local Excel)
-- When the weekday check should run (default: about 09:00 in your timezone)
+**偏好**
+- 符合要求是直接投，还是先确认名单
+- 没有 Easy Apply / Quick Apply 时，默认海王模式：简单就填，复杂就跳过
+- 跑在云电脑，还是你自己的电脑（选自己的电脑时，使用期间和定时任务触发时都要开机在线）
+- 跟踪表放在本地 Excel、Google 表格、飞书、Notion，或你指定的其他表（没说就先给本地 Excel）
+- 日常增量检查几点跑（默认工作日早上大约 9:00）
 
-Sign-in happens on the computer used for the run: take it over and log in yourself, or let the assistant drive login there.
+登录发生在实际使用的那台电脑上：你可以自行接管电脑登录，也可以让助手在这台电脑上走登录流程。
 
-## License
+## 许可
 
-[MIT](LICENSE). Not affiliated with xAI, OpenAI, Anthropic, SEEK/JobsDB, or LinkedIn.
+[MIT](LICENSE)。与 xAI、OpenAI、Anthropic、SEEK/JobsDB、LinkedIn 无关联。
