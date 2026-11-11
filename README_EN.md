@@ -29,8 +29,6 @@ It also runs on ordinary agents that have Browser Use / Computer Use, such as Co
   </tr>
 </table>
 
-This is not an official xAI, OpenAI, or Anthropic repository. There is no service to deploy, and the repo does not include anyone's resume or account.
-
 ## Install
 
 Paste this into any agent that supports Browser Use / Computer Use:

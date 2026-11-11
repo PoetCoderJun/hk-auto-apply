@@ -29,8 +29,6 @@
   </tr>
 </table>
 
-这不是 xAI、OpenAI 或 Anthropic 的官方仓库。这里没有需要单独部署的服务，也不包含任何人的简历或账号。
-
 ## 安装
 
 在支持 Browser Use / Computer Use 的 Agent 里发送：
