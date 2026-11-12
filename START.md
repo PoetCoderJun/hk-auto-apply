@@ -2,7 +2,7 @@
 
 You are installing a skill from https://github.com/PoetCoderJun/linkedin-apply-for-agents
 
-The previous repository name `hk-auto-apply` and URL https://github.com/PoetCoderJun/hk-auto-apply still redirect here. Treat `hk-auto-apply` as an alias of this skill. Always save the `skill/linkedin-apply-for-agents` directory, not a compatibility stub.
+The previous repository name `hk-auto-apply` and URL https://github.com/PoetCoderJun/hk-auto-apply still redirect here. Always save the full `skill/linkedin-apply-for-agents` directory.
 
 This is a LinkedIn auto apply skill for agents that support Browser Use / Computer Use. It works best on Grok Bot or OpenAI Dots: they have a cloud computer that can stay on around the clock, can automatically track application-related email, and can trigger the daily check and send updates on their own. It also runs on ordinary agents with Browser Use / Computer Use, such as Codex, Claude, Cursor, and Kimi.
 

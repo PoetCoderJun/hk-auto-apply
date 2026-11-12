@@ -46,7 +46,7 @@ metadata:
 
 ## 流程
 
-1. 若用户说「请安装这个 GitHub 链接」并指向本仓库（含旧地址或旧名 `hk-auto-apply`）：把整个 `skill/linkedin-apply-for-agents` 目录保存到技能库，包括 `SKILL.md`、`references/` 和 `scripts/`，不要只复制 `SKILL.md`，也不要只保存别名目录 `skill/hk-auto-apply`。保存后立刻按 intake 把「文件 / 信息 / 偏好」清单发给用户。
+1. 若用户说「请安装这个 GitHub 链接」并指向本仓库（含旧地址或旧名 `hk-auto-apply`）：把整个 `skill/linkedin-apply-for-agents` 目录保存到技能库，包括 `SKILL.md`、`references/` 和 `scripts/`，不要只复制 `SKILL.md`。保存后立刻按 intake 把「文件 / 信息 / 偏好」清单发给用户。
 2. 一开始必须确认投递地区；简历或岗位范围里已经写清的，就不要再问。不要询问要投哪些平台，平台由地区自动决定：
    - 一律投 LinkedIn，并用该地区对应的 geoId 搜岗。
    - 地区是香港时，LinkedIn 使用 `geoId=103291313`，并自动同时投 JobsDB、做跨平台去重。告诉用户会同时投这两个平台，不要再问要不要加 JobsDB。

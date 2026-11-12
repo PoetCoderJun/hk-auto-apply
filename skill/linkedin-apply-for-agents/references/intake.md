@@ -1,6 +1,6 @@
 # 安装与收集资料
 
-用户说「请安装这个 GitHub 链接」并贴了本仓库（包括仍会跳转过来的旧地址 https://github.com/PoetCoderJun/hk-auto-apply），或提到旧技能名 `hk-auto-apply` 时：读取 `skill/linkedin-apply-for-agents/SKILL.md`，按原文名称和描述保存，同时把整个 `skill/linkedin-apply-for-agents` 目录（含 `references/`、`scripts/`）放进技能库。不要只保存 `skill/hk-auto-apply` 别名目录。保存成功后，马上把下面清单告诉用户，请他们按「文件 / 信息 / 偏好」一起提供；不要只说「把简历和范围发我」就等待。
+用户说「请安装这个 GitHub 链接」并贴了本仓库（包括仍会跳转过来的旧地址 https://github.com/PoetCoderJun/hk-auto-apply），或提到旧技能名 `hk-auto-apply` 时：读取 `skill/linkedin-apply-for-agents/SKILL.md`，按原文名称和描述保存，同时把整个 `skill/linkedin-apply-for-agents` 目录（含 `references/`、`scripts/`）放进技能库。保存成功后，马上把下面清单告诉用户，请他们按「文件 / 信息 / 偏好」一起提供；不要只说「把简历和范围发我」就等待。
 
 用户说「开始投」「海投」或已经装好本技能时，也用同一份清单核对，缺什么补什么。
 
